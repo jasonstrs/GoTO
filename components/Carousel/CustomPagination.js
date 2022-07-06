@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Pagination} from 'react-native-snap-carousel';
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../Global/colors';
 
 export default function CustomPagination({activeIndex, nbPoints}) {
   return (
@@ -34,6 +35,6 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 5,
     marginHorizontal: 8,
-    backgroundColor: '#2d78f8ff',
+    backgroundColor: COLORS.darkBlue,
   },
 });

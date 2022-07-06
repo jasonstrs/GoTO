@@ -8,6 +8,7 @@
 
 import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import {COLORS} from './components/Global/colors';
 import Navbar from './components/Navbar/Navbar';
 import VueInitiale from './components/VueInitiale/VueInitiale';
 
@@ -25,10 +26,10 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#82affc',
+    backgroundColor: COLORS.blue,
   },
   view: {
-    backgroundColor: '#dee9fc',
+    backgroundColor: COLORS.lightBlue,
   },
 });
 

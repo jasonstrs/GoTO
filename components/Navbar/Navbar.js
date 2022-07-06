@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import ButtonLink from '../../components/Buttons/ButtonLink';
 import copy from '../../copy.json';
+import {COLORS} from '../Global/colors';
 
 export default function Navbar() {
   return (
@@ -27,7 +28,7 @@ export default function Navbar() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#82affc',
+    backgroundColor: COLORS.blue,
     height: 40,
     flexDirection: 'row',
     alignItems: 'center',
