@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Text, View, Dimensions, StyleSheet} from 'react-native';
+import { Text, View, Dimensions, StyleSheet } from 'react-native';
 
 const dimensions = Dimensions.get('window');
 
-export default function CarouselItem({item}) {
+export default function CarouselItem({ item }) {
   return (
     <View style={styles.renderItem}>
       <Text style={styles.size}>{item.title}</Text>

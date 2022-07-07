@@ -7,19 +7,36 @@
  */
 
 import React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
-import {COLORS} from './components/Global/colors';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { COLORS } from './components/global/constant';
 import Navbar from './components/Navbar/Navbar';
-import VueInitiale from './components/VueInitiale/VueInitiale';
+import Home from './components/home';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Connexion from './components/connexion';
+import { navigationRef } from './components/global/rootNavigation';
+import { VIEWS } from './components/global/constant';
+import Inscription from './components/inscription';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.view}>
+    <NavigationContainer ref={navigationRef}>
+      <SafeAreaView style={styles.container}>
         <Navbar />
-        <VueInitiale />
-      </ScrollView>
-    </SafeAreaView>
+        <Stack.Navigator
+          initialRouteName={VIEWS.home}
+          screenOptions={{
+            contentStyle: { backgroundColor: COLORS.lightBlue },
+            headerShown: false,
+          }}>
+          <Stack.Screen name={VIEWS.home} component={Home} />
+          <Stack.Screen name={VIEWS.connexion} component={Connexion} />
+          <Stack.Screen name={VIEWS.inscription} component={Inscription} />
+        </Stack.Navigator>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 };
 
@@ -27,9 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.blue,
-  },
-  view: {
-    backgroundColor: COLORS.lightBlue,
   },
 });
 

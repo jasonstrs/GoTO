@@ -1,8 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
-import CustomCarousel from '../Carousel/CustomCarousel';
+import CustomCarousel from '../carousel/CustomCarousel';
 
-const VueInitiale = () => {
+const Home = () => {
   const carouselItems = [
     {
       title: 'Item 1',
@@ -29,4 +28,4 @@ const VueInitiale = () => {
   return <CustomCarousel items={carouselItems} />;
 };
 
-export default VueInitiale;
+export default Home;
