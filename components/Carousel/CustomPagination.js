@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Pagination} from 'react-native-snap-carousel';
-import {StyleSheet} from 'react-native';
-import {COLORS} from '../Global/colors';
+import { Pagination } from 'react-native-snap-carousel';
+import { StyleSheet } from 'react-native';
+import { COLORS } from '../global/constant';
 
-export default function CustomPagination({activeIndex, nbPoints}) {
+export default function CustomPagination({ activeIndex, nbPoints }) {
   return (
     <Pagination
       activeDotIndex={activeIndex}

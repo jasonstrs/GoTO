@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import CarouselItem from '../Carousel/CarouselItem';
-import CustomPagination from '../Carousel/CustomPagination';
+import CarouselItem from './CarouselItem';
+import CustomPagination from './CustomPagination';
 
-export default function CustomCarousel({items, withPagination}) {
+export default function CustomCarousel({ items, withPagination }) {
   const [index, setIndex] = useState(0);
 
   return (
@@ -15,7 +15,7 @@ export default function CustomCarousel({items, withPagination}) {
         itemWidth={220}
         layout={'default'}
         onSnapToItem={setIndex}
-        renderItem={({item}) => <CarouselItem item={item} />}
+        renderItem={({ item }) => <CarouselItem item={item} />}
         sliderWidth={300}
       />
       {withPagination && (

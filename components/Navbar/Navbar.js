@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import ButtonLink from '../../components/Buttons/ButtonLink';
+import { StyleSheet, Text, View } from 'react-native';
+import ButtonLink from '../buttons/ButtonLink';
 import copy from '../../copy.json';
-import {COLORS} from '../Global/colors';
+import { navigate } from '../global/rootNavigation';
+import { VIEWS } from '../global/constant';
 
-export default function Navbar() {
+export default function Navbar({}) {
   return (
     <View style={styles.container}>
       <View>
@@ -12,12 +13,12 @@ export default function Navbar() {
       </View>
       <View style={styles.rightContainer}>
         <ButtonLink
-          func={() => alert('test')}
+          func={() => navigate(VIEWS.connexion)}
           style={styles.button}
           title={copy.connexion}
         />
         <ButtonLink
-          func={() => alert('test')}
+          func={() => navigate(VIEWS.inscription)}
           style={styles.button}
           title={copy.inscription}
         />
@@ -28,7 +29,6 @@ export default function Navbar() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.blue,
     height: 40,
     flexDirection: 'row',
     alignItems: 'center',
