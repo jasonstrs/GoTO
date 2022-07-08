@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text} from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
-export default function ButtonLink({style, func, title}) {
+export default function ButtonLink({ func, style, title }) {
   return (
     <Text onPress={func} style={[styles.button, style]}>
       {title}

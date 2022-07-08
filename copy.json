@@ -1,4 +1,13 @@
 {
   "connexion": "Connexion",
-  "inscription": "Inscription"
+  "inscription": "Inscription",
+  "requiredField": "Ce champs est requis.",
+  "pattern": "Veuillez respecter le format demandé.",
+  "incorrectEmailAddress": "L'email est incorrect.",
+  "writeEmail": "Adresse mail",
+  "writePassword": "Mot de passe",
+  "noAccount": "Vous n'avez pas encore de compte ?",
+  "subscribe": "Inscrivez-vous",
+  "passwordForgotten": "Mot de passe oublié ?",
+  "ok": "Ok"
 }
