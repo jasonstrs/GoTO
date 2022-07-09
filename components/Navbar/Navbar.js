@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import ButtonLink from '../buttons/ButtonLink';
 import copy from '../../copy.json';
 import { navigate } from '../global/rootNavigation';
-import { VIEWS } from '../global/constant';
+import { COLORS, VIEWS } from '../global/constant';
 
 export default function Navbar({}) {
   return (
@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
   },
   button: {
     marginRight: 8,
+    fontWeight: '600',
+    color: COLORS.blackBlue,
   },
   rightContainer: {
     flexDirection: 'row',

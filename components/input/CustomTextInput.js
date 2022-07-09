@@ -27,7 +27,7 @@ export default function CustomTextInput({
 }
 
 CustomTextInput.propTypes = {
-  errors: PropTypes.obj,
+  errors: PropTypes.any,
   label: PropTypes.string,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,

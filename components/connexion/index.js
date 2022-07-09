@@ -4,8 +4,9 @@ import { useForm, Controller } from 'react-hook-form';
 import CustomTextInput from '../input/CustomTextInput';
 import copy from '../../copy.json';
 import ButtonLink from '../buttons/ButtonLink';
-import { COLORS } from '../global/constant';
+import { COLORS, SIZES } from '../global/constant';
 import CustomButton from '../buttons/CustomButton';
+import Title from '../header/Title';
 
 export default function Connexion({ navigation }) {
   const {
@@ -14,8 +15,8 @@ export default function Connexion({ navigation }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
+      email: '',
+      password: '',
     },
   });
 
@@ -24,6 +25,12 @@ export default function Connexion({ navigation }) {
   return (
     <ScrollView>
       <View style={styles.container}>
+        <Title
+          color={COLORS.blackBlue}
+          size={SIZES.extraBig}
+          title={copy.identificate}
+        />
+
         <Controller
           control={control}
           rules={{
@@ -62,8 +69,9 @@ export default function Connexion({ navigation }) {
 
         <View style={styles.buttonContainer}>
           <CustomButton
+            backgroundColor={COLORS.blue}
             borderColor={COLORS.darkBlue}
-            color={COLORS.blue}
+            color={COLORS.blackBlue}
             onPress={handleSubmit(onSubmit)}
             title={copy.connexion}
           />
