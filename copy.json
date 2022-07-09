@@ -1,13 +1,21 @@
 {
+  "account": "Vous avez déjà un compte ?",
+  "confirmedPassword": "Confirmation de mot de passe",
+  "connect": "Connectez-vous",
   "connexion": "Connexion",
-  "inscription": "Inscription",
-  "requiredField": "Ce champs est requis.",
-  "pattern": "Veuillez respecter le format demandé.",
+  "firstName": "Prénom",
   "incorrectEmailAddress": "L'email est incorrect.",
+  "inscription": "Inscription",
+  "lastName": "Nom",
+  "noAccount": "Vous n'avez pas encore de compte ?",
+  "ok": "Ok",
+  "passwordForgotten": "Mot de passe oublié ?",
+  "pattern": "Veuillez respecter le format demandé.",
+  "requiredField": "Ce champs est requis.",
+  "subscribe": "Inscrivez-vous",
   "writeEmail": "Adresse mail",
   "writePassword": "Mot de passe",
-  "noAccount": "Vous n'avez pas encore de compte ?",
-  "subscribe": "Inscrivez-vous",
-  "passwordForgotten": "Mot de passe oublié ?",
-  "ok": "Ok"
+  "noMatchPassword": "Les deux mots de passe ne correspondent pas.",
+  "createAccount": "Créer un compte",
+  "identificate": "S'identifier"
 }

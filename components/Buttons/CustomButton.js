@@ -4,11 +4,17 @@ import copy from '../../copy.json';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { COLORS } from '../global/constant';
 
-export default function CustomButton({ color, onPress, title, borderColor }) {
+export default function CustomButton({
+  backgroundColor,
+  borderColor,
+  color,
+  onPress,
+  title,
+}) {
   const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
-      backgroundColor: color,
+      backgroundColor: backgroundColor,
       borderColor: borderColor,
       borderRadius: 4,
       borderWidth: 2,
@@ -19,6 +25,7 @@ export default function CustomButton({ color, onPress, title, borderColor }) {
     text: {
       fontSize: 16,
       fontWeight: '500',
+      color: color,
     },
   });
 
@@ -30,6 +37,7 @@ export default function CustomButton({ color, onPress, title, borderColor }) {
 }
 
 CustomButton.propTypes = {
+  backgroundColor: PropTypes.string,
   borderColor: PropTypes.string,
   color: PropTypes.string,
   onPress: PropTypes.func.isRequired,
@@ -37,7 +45,8 @@ CustomButton.propTypes = {
 };
 
 CustomButton.defaultProps = {
+  backgroundColor: COLORS.blue,
   borderColor: COLORS.darkBlue,
-  color: COLORS.blue,
+  color: COLORS.blackBlue,
   title: copy.ok,
 };
