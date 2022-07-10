@@ -7,6 +7,7 @@ import ButtonLink from '../buttons/ButtonLink';
 import copy from '../../copy.json';
 import { COLORS, SIZES } from '../global/constant';
 import Title from '../header/Title';
+import PasswordInput from '../input/PasswordInput';
 
 export default function Inscription({ navigation }) {
   const {
@@ -87,9 +88,8 @@ export default function Inscription({ navigation }) {
           control={control}
           rules={{ required: copy.requiredField }}
           render={({ field: { onChange, onBlur, value } }) => (
-            <CustomTextInput
+            <PasswordInput
               errors={errors.password}
-              isSecured
               label={copy.writePassword}
               onBlur={onBlur}
               onChange={onChange}
@@ -106,9 +106,8 @@ export default function Inscription({ navigation }) {
               watch('password') === value ? true : copy.noMatchPassword,
           }}
           render={({ field: { onChange, onBlur, value } }) => (
-            <CustomTextInput
+            <PasswordInput
               errors={errors.confirmedPassword}
-              isSecured
               label={copy.confirmedPassword}
               onBlur={onBlur}
               onChange={onChange}
