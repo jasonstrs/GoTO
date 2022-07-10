@@ -58,6 +58,7 @@ export default function Connexion({ navigation }) {
           render={({ field: { onChange, onBlur, value } }) => (
             <CustomTextInput
               errors={errors.password}
+              isSecured
               label={copy.writePassword}
               onBlur={onBlur}
               onChange={onChange}

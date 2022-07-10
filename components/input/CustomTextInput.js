@@ -5,6 +5,7 @@ import { COLORS } from '../global/constant';
 
 export default function CustomTextInput({
   errors,
+  isSecured,
   label,
   onBlur,
   onChange,
@@ -13,12 +14,14 @@ export default function CustomTextInput({
   return (
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
-      <TextInput
-        style={styles.input}
-        onBlur={onBlur}
-        onChangeText={onChange}
-        value={value}
-      />
+      <View style={styles.input}>
+        <TextInput
+          onBlur={onBlur}
+          onChangeText={onChange}
+          secureTextEntry={isSecured}
+          value={value}
+        />
+      </View>
       {Boolean(Object.keys(errors).length) && (
         <Text style={styles.error}>{errors.message}</Text>
       )}
@@ -28,6 +31,7 @@ export default function CustomTextInput({
 
 CustomTextInput.propTypes = {
   errors: PropTypes.any,
+  isSecured: PropTypes.bool,
   label: PropTypes.string,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
@@ -36,6 +40,7 @@ CustomTextInput.propTypes = {
 
 CustomTextInput.defaultProps = {
   errors: {},
+  isSecured: false,
   label: null,
   onBlur: () => {},
   onChange: () => {},

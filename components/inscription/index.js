@@ -89,6 +89,7 @@ export default function Inscription({ navigation }) {
           render={({ field: { onChange, onBlur, value } }) => (
             <CustomTextInput
               errors={errors.password}
+              isSecured
               label={copy.writePassword}
               onBlur={onBlur}
               onChange={onChange}
@@ -107,6 +108,7 @@ export default function Inscription({ navigation }) {
           render={({ field: { onChange, onBlur, value } }) => (
             <CustomTextInput
               errors={errors.confirmedPassword}
+              isSecured
               label={copy.confirmedPassword}
               onBlur={onBlur}
               onChange={onChange}
