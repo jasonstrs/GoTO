@@ -7,6 +7,7 @@ import ButtonLink from '../buttons/ButtonLink';
 import { COLORS, SIZES } from '../global/constant';
 import CustomButton from '../buttons/CustomButton';
 import Title from '../header/Title';
+import PasswordInput from '../input/PasswordInput';
 
 export default function Connexion({ navigation }) {
   const {
@@ -56,9 +57,8 @@ export default function Connexion({ navigation }) {
           control={control}
           rules={{ required: copy.requiredField }}
           render={({ field: { onChange, onBlur, value } }) => (
-            <CustomTextInput
+            <PasswordInput
               errors={errors.password}
-              isSecured
               label={copy.writePassword}
               onBlur={onBlur}
               onChange={onChange}
