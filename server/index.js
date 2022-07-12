@@ -8,12 +8,12 @@ var db = null;
 // REQUESTS
 app.get('/accueil', (req, res) => {
   if (db != null) {
-    dbFunctions
-      .getAccueil(db, () => {})
-      .then(
-        data => res.status(200).json({ data }),
-        err => res.status(404).json({ erreur: err }),
-      );
+    dbFunctions.getAccueil(db).then(
+      data => {
+        return res.status(200).json({ data });
+      },
+      err => res.status(404).json({ erreur: err }),
+    );
   } else {
     res.status(404).json({ erreur: 'erreur' });
   }

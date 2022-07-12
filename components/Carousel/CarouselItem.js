@@ -18,7 +18,8 @@ export default function CarouselItem({ item }) {
 }
 
 CarouselItem.propTypes = {
-  item: PropTypes.objectOf({
+  item: PropTypes.shape({
+    _id: PropTypes.string,
     imagePath: PropTypes.string,
     title: PropTypes.string,
     text: PropTypes.string,

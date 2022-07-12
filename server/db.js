@@ -1,7 +1,7 @@
 const url = 'mongodb://localhost:27017'; // Connection URL
 const dbName = 'GoTO'; // Database Name
 
-const getAccueil = (db, callback) => {
+const getAccueil = db => {
   return new Promise((resolve, reject) => {
     db.collection('accueil')
       .find()
