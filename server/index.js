@@ -3,9 +3,13 @@ const app = express();
 const dbFunctions = require('./db');
 const MongoClient = require('mongodb').MongoClient;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 var db = null;
 
 // REQUESTS
+
+/* ACCUEIL */
 app.get('/accueil', (req, res) => {
   if (db != null) {
     dbFunctions.getAccueil(db).then(
@@ -13,6 +17,22 @@ app.get('/accueil', (req, res) => {
         return res.status(200).json({ data });
       },
       err => res.status(404).json({ erreur: err }),
+    );
+  } else {
+    res.status(404).json({ erreur: 'erreur' });
+  }
+});
+
+/* USER */
+app.post('/user', (req, res) => {
+  if (db != null) {
+    dbFunctions.insertUser(db, req.body).then(
+      data => {
+        return res.status(200).json({ data });
+      },
+      err => {
+        return res.status(404).json({ erreur: err });
+      },
     );
   } else {
     res.status(404).json({ erreur: 'erreur' });

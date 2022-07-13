@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View, StyleSheet } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import CustomTextInput from '../input/CustomTextInput';
@@ -8,8 +8,11 @@ import { COLORS, SIZES } from '../global/constant';
 import CustomButton from '../buttons/CustomButton';
 import Title from '../header/Title';
 import PasswordInput from '../input/PasswordInput';
+import { isEmpty } from 'lodash';
+import Banner from '../banner/Banner';
 
-export default function Connexion({ navigation }) {
+export default function Connexion({ navigation, route }) {
+  const [showBanner, setShowBanner] = useState(false);
   const {
     control,
     handleSubmit,
@@ -21,11 +24,26 @@ export default function Connexion({ navigation }) {
     },
   });
 
+  useEffect(() => {
+    if (!isEmpty(route.params.user)) {
+      setShowBanner(true);
+    } else {
+      setShowBanner(false);
+    }
+  }, [route.params.user]);
+
   const onSubmit = data => console.log(data);
 
   return (
     <ScrollView>
       <View style={styles.container}>
+        {showBanner && (
+          <Banner
+            backgroundColor={COLORS.green}
+            color="white"
+            text={copy['inscription.finie']}
+          />
+        )}
         <Title
           color={COLORS.blackBlue}
           size={SIZES.extraBig}
