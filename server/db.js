@@ -14,8 +14,20 @@ const getAccueil = db => {
   });
 };
 
+const insertUser = (db, user) => {
+  return new Promise((resolve, reject) => {
+    db.collection('user').insertOne(user, (err, userInserted) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(userInserted.insertedId);
+    });
+  });
+};
+
 module.exports = {
-  getAccueil,
-  url,
   dbName,
+  getAccueil,
+  insertUser,
+  url,
 };

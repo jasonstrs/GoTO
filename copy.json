@@ -17,5 +17,7 @@
   "writePassword": "Mot de passe",
   "noMatchPassword": "Les deux mots de passe ne correspondent pas.",
   "createAccount": "Créer un compte",
-  "identificate": "S'identifier"
+  "identificate": "S'identifier",
+  "inscription.duplicatedEmail": "L'adresse mail saisie est déjà utilisée.",
+  "inscription.finie": "Votre compte a été créé ! Vous pouvez désormais vous connecter."
 }

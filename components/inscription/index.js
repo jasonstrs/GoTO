@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import CustomTextInput from '../input/CustomTextInput';
@@ -8,8 +8,11 @@ import copy from '../../copy.json';
 import { COLORS, SIZES } from '../global/constant';
 import Title from '../header/Title';
 import PasswordInput from '../input/PasswordInput';
+import { postUser } from '../../services';
+import Banner from '../banner/Banner';
 
 export default function Inscription({ navigation }) {
+  const [showBanner, setShowBanner] = useState(false);
   const {
     control,
     handleSubmit,
@@ -25,11 +28,27 @@ export default function Inscription({ navigation }) {
     },
   });
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    postUser(data).then(({ data: dataRes, erreur }) => {
+      if (erreur) {
+        setShowBanner(true);
+      } else {
+        setShowBanner(false);
+        navigation.navigate('Connexion', { user: dataRes });
+      }
+    });
+  };
 
   return (
     <ScrollView>
       <View style={styles.container}>
+        {showBanner && (
+          <Banner
+            backgroundColor={COLORS.red}
+            color="white"
+            text={copy['inscription.duplicatedEmail']}
+          />
+        )}
         <Title
           color={COLORS.blackBlue}
           size={SIZES.extraBig}
