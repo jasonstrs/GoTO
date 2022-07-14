@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const url = 'mongodb://localhost:27017'; // Connection URL
 const dbName = 'GoTO'; // Database Name
 
@@ -16,11 +17,28 @@ const getAccueil = db => {
 
 const insertUser = (db, user) => {
   return new Promise((resolve, reject) => {
-    db.collection('user').insertOne(user, (err, userInserted) => {
+    hashPassword(user.password).then(
+      hash => {
+        user.password = hash;
+        db.collection('user').insertOne(user, (err, userInserted) => {
+          if (err) {
+            return reject(err);
+          }
+          return resolve(userInserted.insertedId);
+        });
+      },
+      err => console.log(`Erreur : ${err}`),
+    );
+  });
+};
+
+const hashPassword = password => {
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
         return reject(err);
       }
-      return resolve(userInserted.insertedId);
+      return resolve(hash);
     });
   });
 };
