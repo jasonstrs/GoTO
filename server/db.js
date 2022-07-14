@@ -20,6 +20,7 @@ const insertUser = (db, user) => {
     hashPassword(user.password).then(
       hash => {
         user.password = hash;
+        user.email = user.email.toLowerCase();
         db.collection('user').insertOne(user, (err, userInserted) => {
           if (err) {
             return reject(err);
@@ -29,6 +30,25 @@ const insertUser = (db, user) => {
       },
       err => console.log(`Erreur : ${err}`),
     );
+  });
+};
+
+const connexion = (db, user) => {
+  return new Promise((resolve, reject) => {
+    user.email = user.email.toLowerCase();
+    db.collection('user')
+      .find({ email: user.email })
+      .toArray((err, resultat) => {
+        if (err || resultat.length === 0) {
+          return reject();
+        }
+        bcrypt.compare(user.password, resultat[0].password, (error, res) => {
+          if (error || !res) {
+            return reject();
+          }
+          return resolve(true);
+        });
+      });
   });
 };
 
@@ -44,6 +64,7 @@ const hashPassword = password => {
 };
 
 module.exports = {
+  connexion,
   dbName,
   getAccueil,
   insertUser,

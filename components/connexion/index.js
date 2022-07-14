@@ -10,6 +10,7 @@ import Title from '../header/Title';
 import PasswordInput from '../input/PasswordInput';
 import { isEmpty } from 'lodash';
 import Banner from '../banner/Banner';
+import { postConnexion } from '../../services';
 
 export default function Connexion({ navigation, route }) {
   const [showBanner, setShowBanner] = useState(false);
@@ -32,7 +33,11 @@ export default function Connexion({ navigation, route }) {
     }
   }, [route.params.user]);
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    // TODO : show ERROR depends on error or success
+    // SET JWT
+    postConnexion(data);
+  };
 
   return (
     <ScrollView>

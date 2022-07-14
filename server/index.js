@@ -19,7 +19,9 @@ app.get('/accueil', (req, res) => {
       err => res.status(404).json({ erreur: err }),
     );
   } else {
-    res.status(404).json({ erreur: 'erreur' });
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
   }
 });
 
@@ -35,7 +37,26 @@ app.post('/user', (req, res) => {
       },
     );
   } else {
-    res.status(404).json({ erreur: 'erreur' });
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
+app.post('/connexion', (req, res) => {
+  if (db != null) {
+    dbFunctions.connexion(db, req.body).then(
+      () => {
+        return res.status(200).json({ success: true });
+      },
+      () => {
+        return res.status(404).json({ success: false });
+      },
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
   }
 });
 
