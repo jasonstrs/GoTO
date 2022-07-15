@@ -8,9 +8,10 @@ export const COLORS = {
 };
 
 export const VIEWS = {
-  home: 'Home',
   connexion: 'Connexion',
+  home: 'Home',
   inscription: 'Inscription',
+  mainPage: 'MainPage',
 };
 
 export const SIZES = {

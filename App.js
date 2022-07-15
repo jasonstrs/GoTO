@@ -17,6 +17,7 @@ import Connexion from './components/connexion';
 import { navigationRef } from './components/global/rootNavigation';
 import { VIEWS } from './components/global/constant';
 import Inscription from './components/inscription';
+import MainPage from './components/MainPage/MainPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,7 @@ const App = () => {
           <Stack.Screen name={VIEWS.home} component={Home} />
           <Stack.Screen name={VIEWS.connexion} component={Connexion} />
           <Stack.Screen name={VIEWS.inscription} component={Inscription} />
+          <Stack.Screen name={VIEWS.mainPage} component={MainPage} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>

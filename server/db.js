@@ -46,6 +46,8 @@ const connexion = (db, user) => {
           if (error || !res) {
             return reject();
           }
+
+          // TODO : insert JWT stuff
           return resolve(true);
         });
       });
