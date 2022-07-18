@@ -17,7 +17,7 @@ import Connexion from './components/connexion';
 import { navigationRef } from './components/global/rootNavigation';
 import { VIEWS } from './components/global/constant';
 import Inscription from './components/inscription';
-import MainPage from './components/MainPage/MainPage';
+import MainPage from './components/mainPage/MainPage';
 
 const Stack = createNativeStackNavigator();
 

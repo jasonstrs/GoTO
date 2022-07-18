@@ -1,6 +1,10 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Button } from 'react-native';
 
 export default function MainPage() {
-  return <Text>Main Page</Text>;
+  const onClick = () => {
+    console.log('clic');
+  };
+
+  return <Button onPress={onClick} title='clic me!' />;
 }

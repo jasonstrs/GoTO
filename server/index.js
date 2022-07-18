@@ -1,10 +1,14 @@
 const express = require('express');
 const app = express();
+var cookieParser = require('cookie-parser');
 const dbFunctions = require('./db');
+const { generateToken, verifyToken } = require('./jwt');
 const MongoClient = require('mongodb').MongoClient;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
+
 var db = null;
 
 // REQUESTS
@@ -46,7 +50,9 @@ app.post('/user', (req, res) => {
 app.post('/connexion', (req, res) => {
   if (db != null) {
     dbFunctions.connexion(db, req.body).then(
-      () => {
+      ({ password, ...other }) => {
+        generateToken(other, res);
+
         return res.status(200).json({ success: true });
       },
       () => {
