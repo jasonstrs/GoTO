@@ -4,15 +4,18 @@ import { useForm, Controller } from 'react-hook-form';
 import CustomTextInput from '../input/CustomTextInput';
 import copy from '../../copy.json';
 import ButtonLink from '../buttons/ButtonLink';
-import { COLORS, SIZES } from '../global/constant';
+import { COLORS, SIZES, VIEWS } from '../global/constant';
 import CustomButton from '../buttons/CustomButton';
 import Title from '../header/Title';
 import PasswordInput from '../input/PasswordInput';
 import { isEmpty } from 'lodash';
 import Banner from '../banner/Banner';
+import { postConnexion } from '../../services';
 
-export default function Connexion({ navigation, route }) {
+export default function Connexion({ navigation, route, setToken }) {
   const [showBanner, setShowBanner] = useState(false);
+  const [error, setError] = useState(null);
+
   const {
     control,
     handleSubmit,
@@ -32,7 +35,18 @@ export default function Connexion({ navigation, route }) {
     }
   }, [route.params.user]);
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    postConnexion(data).then(({ erreur, success }) => {
+      setShowBanner(false);
+      if (erreur || !success) {
+        setError(!success ? copy['connexion.misMatch'] : erreur);
+      } else {
+        setError(null);
+        setToken(true);
+        navigation.navigate(VIEWS.mainPage);
+      }
+    });
+  };
 
   return (
     <ScrollView>
@@ -43,6 +57,9 @@ export default function Connexion({ navigation, route }) {
             color="white"
             text={copy['inscription.finie']}
           />
+        )}
+        {error && (
+          <Banner backgroundColor={COLORS.red} color="white" text={error} />
         )}
         <Title
           color={COLORS.blackBlue}

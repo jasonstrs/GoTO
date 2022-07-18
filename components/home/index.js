@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
 import { getAccueil } from '../../services';
 import CustomCarousel from '../carousel/CustomCarousel';
 

@@ -19,5 +19,6 @@
   "createAccount": "Créer un compte",
   "identificate": "S'identifier",
   "inscription.duplicatedEmail": "L'adresse mail saisie est déjà utilisée.",
-  "inscription.finie": "Votre compte a été créé ! Vous pouvez désormais vous connecter."
+  "inscription.finie": "Votre compte a été créé ! Vous pouvez désormais vous connecter.",
+  "connexion.misMatch": "Les identifiants saisit sont incorrects."
 }
