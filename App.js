@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS } from './components/global/constant';
 import Navbar from './components/Navbar/Navbar';
@@ -17,17 +17,23 @@ import Connexion from './components/connexion';
 import { navigationRef } from './components/global/rootNavigation';
 import { VIEWS } from './components/global/constant';
 import Inscription from './components/inscription';
-import MainPage from './components/mainPage/MainPage';
 import Loading from './components/loading';
 import { checkToken } from './services';
+import { useSelector, useDispatch } from 'react-redux';
+import { setToken } from './redux/features/user/userSlice';
+import MainPage from './components/mainPage/MainPage';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [token, setToken] = useState(null);
+  const token = useSelector(state => state.user.token);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    checkToken().then(({ success }) => setToken(success));
-  }, []);
+    checkToken().then(({ success }) => {
+      dispatch(setToken({ token: success }));
+    });
+  }, [dispatch]);
 
   return (
     <NavigationContainer ref={navigationRef}>
@@ -47,11 +53,7 @@ const App = () => {
             ) : (
               <>
                 <Stack.Screen name={VIEWS.home} component={Home} />
-                <Stack.Screen
-                  name={VIEWS.connexion}
-                  component={Connexion}
-                  initialParams={{ setToken }}
-                />
+                <Stack.Screen name={VIEWS.connexion} component={Connexion} />
                 <Stack.Screen
                   name={VIEWS.inscription}
                   component={Inscription}

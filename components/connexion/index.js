@@ -11,10 +11,13 @@ import PasswordInput from '../input/PasswordInput';
 import { isEmpty } from 'lodash';
 import Banner from '../banner/Banner';
 import { postConnexion } from '../../services';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../redux/features/user/userSlice';
 
-export default function Connexion({ navigation, route, setToken }) {
+export default function Connexion({ navigation, route }) {
   const [showBanner, setShowBanner] = useState(false);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
   const {
     control,
@@ -42,7 +45,7 @@ export default function Connexion({ navigation, route, setToken }) {
         setError(!success ? copy['connexion.misMatch'] : erreur);
       } else {
         setError(null);
-        setToken(true);
+        dispatch(setToken({ token: true }));
         navigation.navigate(VIEWS.mainPage);
       }
     });
