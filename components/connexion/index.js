@@ -12,7 +12,7 @@ import { isEmpty } from 'lodash';
 import Banner from '../banner/Banner';
 import { postConnexion } from '../../services';
 
-export default function Connexion({ navigation, route }) {
+export default function Connexion({ navigation, route, setToken }) {
   const [showBanner, setShowBanner] = useState(false);
   const [error, setError] = useState(null);
 
@@ -42,6 +42,7 @@ export default function Connexion({ navigation, route }) {
         setError(!success ? copy['connexion.misMatch'] : erreur);
       } else {
         setError(null);
+        setToken(true);
         navigation.navigate(VIEWS.mainPage);
       }
     });

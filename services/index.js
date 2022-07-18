@@ -38,3 +38,8 @@ export const postConnexion = body => {
   const url = 'http://localhost:8080/connexion';
   return postRequest(url, body);
 };
+
+export const checkToken = () => {
+  const url = 'http://localhost:8080/token';
+  return getRequest(url);
+};

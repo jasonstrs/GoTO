@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS } from './components/global/constant';
 import Navbar from './components/Navbar/Navbar';
@@ -18,25 +18,48 @@ import { navigationRef } from './components/global/rootNavigation';
 import { VIEWS } from './components/global/constant';
 import Inscription from './components/inscription';
 import MainPage from './components/mainPage/MainPage';
+import Loading from './components/loading';
+import { checkToken } from './services';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    checkToken().then(({ success }) => setToken(success));
+  }, []);
+
   return (
     <NavigationContainer ref={navigationRef}>
       <SafeAreaView style={styles.container}>
         <Navbar />
-        <Stack.Navigator
-          initialRouteName={VIEWS.home}
-          screenOptions={{
-            contentStyle: { backgroundColor: COLORS.lightBlue },
-            headerShown: false,
-          }}>
-          <Stack.Screen name={VIEWS.home} component={Home} />
-          <Stack.Screen name={VIEWS.connexion} component={Connexion} />
-          <Stack.Screen name={VIEWS.inscription} component={Inscription} />
-          <Stack.Screen name={VIEWS.mainPage} component={MainPage} />
-        </Stack.Navigator>
+        {token === null ? (
+          <Loading />
+        ) : (
+          <Stack.Navigator
+            initialRouteName={VIEWS.home}
+            screenOptions={{
+              contentStyle: { backgroundColor: COLORS.lightBlue },
+              headerShown: false,
+            }}>
+            {token === true ? (
+              <Stack.Screen name={VIEWS.mainPage} component={MainPage} />
+            ) : (
+              <>
+                <Stack.Screen name={VIEWS.home} component={Home} />
+                <Stack.Screen
+                  name={VIEWS.connexion}
+                  component={Connexion}
+                  initialParams={{ setToken }}
+                />
+                <Stack.Screen
+                  name={VIEWS.inscription}
+                  component={Inscription}
+                />
+              </>
+            )}
+          </Stack.Navigator>
+        )}
       </SafeAreaView>
     </NavigationContainer>
   );

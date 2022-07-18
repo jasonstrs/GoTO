@@ -66,6 +66,19 @@ app.post('/connexion', (req, res) => {
   }
 });
 
+app.get('/token', (req, res) => {
+  if (db != null) {
+    verifyToken(req.cookies.token).then(
+      user => res.status(200).json({ success: true, user }),
+      () => res.status(404).json({ success: false }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
 // Connexion
 MongoClient.connect(dbFunctions.url, { useNewUrlParser: true })
   .then(client => {

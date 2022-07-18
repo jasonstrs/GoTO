@@ -5,24 +5,26 @@ import copy from '../../copy.json';
 import { navigate } from '../global/rootNavigation';
 import { COLORS, VIEWS } from '../global/constant';
 
-export default function Navbar({}) {
+export default function Navbar({ token }) {
   return (
     <View style={styles.container}>
       <View>
         <Text>Image</Text>
       </View>
-      <View style={styles.rightContainer}>
-        <ButtonLink
-          func={() => navigate(VIEWS.connexion)}
-          style={styles.button}
-          title={copy.connexion}
-        />
-        <ButtonLink
-          func={() => navigate(VIEWS.inscription)}
-          style={styles.button}
-          title={copy.inscription}
-        />
-      </View>
+      {token === false && (
+        <View style={styles.rightContainer}>
+          <ButtonLink
+            func={() => navigate(VIEWS.connexion)}
+            style={styles.button}
+            title={copy.connexion}
+          />
+          <ButtonLink
+            func={() => navigate(VIEWS.inscription)}
+            style={styles.button}
+            title={copy.inscription}
+          />
+        </View>
+      )}
     </View>
   );
 }
