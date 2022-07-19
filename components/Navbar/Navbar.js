@@ -4,8 +4,11 @@ import ButtonLink from '../buttons/ButtonLink';
 import copy from '../../copy.json';
 import { navigate } from '../global/rootNavigation';
 import { COLORS, VIEWS } from '../global/constant';
+import { useSelector } from 'react-redux';
 
-export default function Navbar({ token }) {
+export default function Navbar() {
+  const token = useSelector(state => state.user.token);
+
   return (
     <View style={styles.container}>
       <View>

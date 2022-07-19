@@ -13,10 +13,15 @@ import Banner from '../banner/Banner';
 import { postConnexion } from '../../services';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../../redux/features/user/userSlice';
+import CustomModal from '../modal/Modal';
+import ForgottenPassword from './ForgottenPassword';
+import PasswordSent from './PasswordSent';
 
 export default function Connexion({ navigation, route }) {
   const [showBanner, setShowBanner] = useState(false);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [isSucceed, setIsSucceed] = useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -28,6 +33,14 @@ export default function Connexion({ navigation, route }) {
       email: '',
       password: '',
     },
+  });
+
+  const {
+    control: controlModal,
+    handleSubmit: handleSubmitModal,
+    formState: { errors: errorsModal },
+  } = useForm({
+    defaultValues: { email: '' },
   });
 
   useEffect(() => {
@@ -49,6 +62,13 @@ export default function Connexion({ navigation, route }) {
         navigation.navigate(VIEWS.mainPage);
       }
     });
+  };
+
+  const onPressModal = data => {
+    console.log('data Modal : ' + data);
+
+    // TODO : faire la requête
+    setIsSucceed(true);
   };
 
   return (
@@ -125,11 +145,29 @@ export default function Connexion({ navigation, route }) {
           />
         </Text>
         <ButtonLink
-          func={() => navigation.navigate('Home')}
+          func={() => setShowModal(true)}
           style={styles.link}
-          title={copy.passwordForgotten}
+          title={`${copy.passwordForgotten} ?`}
         />
       </View>
+      <CustomModal
+        cancelText={copy.retour}
+        isVisible={showModal}
+        onConfirm={
+          isSucceed
+            ? () => setShowModal(false)
+            : handleSubmitModal(onPressModal)
+        }
+        setVisible={setShowModal}
+        submitText={isSucceed ? copy.ok : copy.confirmer}
+        title={copy.passwordForgotten}
+        withCancel={!isSucceed}>
+        {isSucceed ? (
+          <PasswordSent />
+        ) : (
+          <ForgottenPassword control={controlModal} errors={errorsModal} />
+        )}
+      </CustomModal>
     </ScrollView>
   );
 }

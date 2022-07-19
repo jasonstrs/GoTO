@@ -9,7 +9,7 @@
   "lastName": "Nom",
   "noAccount": "Vous n'avez pas encore de compte ?",
   "ok": "Ok",
-  "passwordForgotten": "Mot de passe oublié ?",
+  "passwordForgotten": "Mot de passe oublié",
   "pattern": "Veuillez respecter le format demandé.",
   "requiredField": "Ce champs est requis.",
   "subscribe": "Inscrivez-vous",
@@ -20,5 +20,10 @@
   "identificate": "S'identifier",
   "inscription.duplicatedEmail": "L'adresse mail saisie est déjà utilisée.",
   "inscription.finie": "Votre compte a été créé ! Vous pouvez désormais vous connecter.",
-  "connexion.misMatch": "Les identifiants saisit sont incorrects."
+  "connexion.misMatch": "Les identifiants saisit sont incorrects.",
+  "annuler": "Annuler",
+  "retour": "Retour",
+  "confirmer": "Confirmer",
+  "forgottenPassword.instructions": "Veuillez saisir l'adresse mail liée à votre compte.",
+  "forgottenPassword.success": "Un email vient de vous être envoyé. Vous pouvez consulter votre boite mail. Si vous ne recevez rien, c'est peut-être que l'adresse mail saisie ne correspond à aucun compte sur notre plateforme."
 }
