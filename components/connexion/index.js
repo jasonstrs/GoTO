@@ -13,10 +13,12 @@ import Banner from '../banner/Banner';
 import { postConnexion } from '../../services';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../../redux/features/user/userSlice';
+import CustomModal from '../modal/Modal';
 
 export default function Connexion({ navigation, route }) {
   const [showBanner, setShowBanner] = useState(false);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -125,11 +127,16 @@ export default function Connexion({ navigation, route }) {
           />
         </Text>
         <ButtonLink
-          func={() => navigation.navigate('Home')}
+          func={() => setShowModal(true)}
           style={styles.link}
           title={copy.passwordForgotten}
         />
       </View>
+      <CustomModal
+        isVisible={showModal}
+        setVisible={setShowModal}
+        title={'test'}
+      />
     </ScrollView>
   );
 }
