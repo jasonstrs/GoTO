@@ -7,12 +7,15 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { COLORS } from '../global/constant';
 import Title from '../header/Title';
 import CustomButton from '../buttons/CustomButton';
+import copy from '../../copy.json';
 
 export default function CustomModal({
+  cancelText,
   children,
   isVisible,
   onConfirm,
   setVisible,
+  submitText,
   title,
   withCancel,
   withCross,
@@ -44,7 +47,7 @@ export default function CustomModal({
                 borderColor={COLORS.red}
                 color={COLORS.red}
                 onPress={handleClose}
-                title={'OK'}
+                title={cancelText}
               />
             )}
             <CustomButton
@@ -52,7 +55,7 @@ export default function CustomModal({
               borderColor={COLORS.darkBlue}
               color={COLORS.blackBlue}
               onPress={onConfirm}
-              title={'OK'}
+              title={submitText}
               styleProp={styles.submitButton}
             />
           </View>
@@ -64,9 +67,11 @@ export default function CustomModal({
 
 CustomModal.propTypes = {
   children: PropTypes.node.isRequired,
+  cancelText: PropTypes.string,
   isVisible: PropTypes.bool,
   onConfirm: PropTypes.func,
   setVisible: PropTypes.func,
+  submitText: PropTypes.string,
   title: PropTypes.string,
   withCancel: PropTypes.bool,
   withCross: PropTypes.bool,
@@ -74,8 +79,10 @@ CustomModal.propTypes = {
 
 CustomModal.defaultProps = {
   isVisible: false,
+  cancelText: copy.annuler,
   onConfirm: () => {},
   setVisible: () => {},
+  submitText: copy.ok,
   title: null,
   withCancel: true,
   withCross: true,
@@ -97,6 +104,7 @@ const styles = StyleSheet.create({
   containerButton: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    marginTop: 16,
   },
   submitButton: {
     marginLeft: 12,
