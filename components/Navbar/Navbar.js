@@ -12,9 +12,17 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 export default function Navbar() {
   const token = useSelector(state => state.user.token);
 
+  const logoClic = () => {
+    if (token) {
+      navigate(VIEWS.mainPage);
+    } else {
+      navigate(VIEWS.home);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.logoContainer}>
+      <TouchableOpacity style={styles.logoContainer} onPress={logoClic}>
         <Image style={styles.logo} source={IMAGES.logo} />
       </TouchableOpacity>
       {token === false && (
