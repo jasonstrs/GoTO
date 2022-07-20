@@ -1,19 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import ButtonLink from '../buttons/ButtonLink';
 import copy from '../../copy.json';
 import { navigate } from '../global/rootNavigation';
 import { COLORS, VIEWS } from '../global/constant';
 import { useSelector } from 'react-redux';
+import { IMAGES } from '../../asset/img';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
   const token = useSelector(state => state.user.token);
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Image</Text>
-      </View>
+      <TouchableOpacity style={styles.logoContainer}>
+        <Image style={styles.logo} source={IMAGES.logo} />
+      </TouchableOpacity>
       {token === false && (
         <View style={styles.rightContainer}>
           <ButtonLink
@@ -27,6 +30,15 @@ export default function Navbar() {
             title={copy.inscription}
           />
         </View>
+      )}
+      {token === true && (
+        <TouchableOpacity style={styles.profilIcon}>
+          <FontAwesomeIcon
+            icon={faCircleUser}
+            size={24}
+            color={COLORS.blackBlue}
+          />
+        </TouchableOpacity>
       )}
     </View>
   );
@@ -46,5 +58,15 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     flexDirection: 'row',
+  },
+  logoContainer: {
+    marginLeft: 8,
+  },
+  logo: {
+    height: 32,
+    width: 100,
+  },
+  profilIcon: {
+    marginRight: 8,
   },
 });
