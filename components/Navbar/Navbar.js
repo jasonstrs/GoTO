@@ -1,16 +1,18 @@
-import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native';
 import ButtonLink from '../buttons/ButtonLink';
 import copy from '../../copy.json';
 import { navigate } from '../global/rootNavigation';
 import { COLORS, VIEWS } from '../global/constant';
 import { useSelector } from 'react-redux';
+import CustomModal from '../modal/Modal';
 import { IMAGES } from '../../asset/img';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
   const token = useSelector(state => state.user.token);
+  const [showModal, setShowModal] = useState(false);
 
   const logoClic = () => {
     if (token) {
@@ -40,13 +42,25 @@ export default function Navbar() {
         </View>
       )}
       {token === true && (
-        <TouchableOpacity style={styles.profilIcon}>
-          <FontAwesomeIcon
-            icon={faCircleUser}
-            size={24}
-            color={COLORS.blackBlue}
-          />
-        </TouchableOpacity>
+        <View style={styles.logoModalContainer}>
+          <TouchableOpacity
+            style={styles.profilIcon}
+            onPress={() => setShowModal(true)}>
+            <FontAwesomeIcon
+              icon={faCircleUser}
+              size={24}
+              color={COLORS.blackBlue}
+            />
+          </TouchableOpacity>
+          <CustomModal
+            isVisible={showModal}
+            setVisible={setShowModal}
+            animationIn={'slideInRight'}
+            animationOut={'slideOutRight'}
+            styleProp={styles.modal}>
+            <Text>Text</Text>
+          </CustomModal>
+        </View>
       )}
     </View>
   );
@@ -76,5 +90,13 @@ const styles = StyleSheet.create({
   },
   profilIcon: {
     marginRight: 8,
+    marginTop: 6,
+  },
+  modal: {
+    marginRight: 0,
+    marginBottom: 0,
+    marginTop: 24,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 });

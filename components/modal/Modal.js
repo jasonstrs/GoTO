@@ -15,10 +15,12 @@ export default function CustomModal({
   isVisible,
   onConfirm,
   setVisible,
+  styleProp,
   submitText,
   title,
   withCancel,
   withCross,
+  ...others
 }) {
   const handleClose = e => {
     e.preventDefault();
@@ -29,9 +31,10 @@ export default function CustomModal({
     <View style={styles.container}>
       <Modal
         onBackdropPress={handleClose}
-        style={styles.container}
+        style={[styles.container, styleProp]}
         isVisible={isVisible}
-        onBackButtonPress={handleClose}>
+        onBackButtonPress={handleClose}
+        {...others}>
         <View style={styles.modal}>
           {withCross && (
             <TouchableOpacity style={styles.xmark} onPress={handleClose}>
@@ -72,6 +75,7 @@ CustomModal.propTypes = {
   onConfirm: PropTypes.func,
   setVisible: PropTypes.func,
   submitText: PropTypes.string,
+  styleProp: PropTypes.object,
   title: PropTypes.string,
   withCancel: PropTypes.bool,
   withCross: PropTypes.bool,
@@ -83,6 +87,7 @@ CustomModal.defaultProps = {
   onConfirm: () => {},
   setVisible: () => {},
   submitText: copy.ok,
+  styleProp: null,
   title: null,
   withCancel: true,
   withCross: true,
@@ -94,7 +99,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     backgroundColor: COLORS.lightBlue,
-    maxHeight: '70%',
+    // maxHeight: '70%', TODO : for now
     borderRadius: 6,
     padding: 8,
   },
