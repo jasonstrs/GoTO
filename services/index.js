@@ -43,3 +43,8 @@ export const checkToken = () => {
   const url = 'http://localhost:8080/token';
   return getRequest(url);
 };
+
+export const postLogOut = () => {
+  const url = 'http://localhost:8080/deconnexion';
+  return postRequest(url);
+};

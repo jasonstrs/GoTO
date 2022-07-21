@@ -15,10 +15,13 @@ export default function CustomModal({
   isVisible,
   onConfirm,
   setVisible,
+  styleProp,
   submitText,
   title,
   withCancel,
   withCross,
+  withFooter,
+  ...others
 }) {
   const handleClose = e => {
     e.preventDefault();
@@ -29,9 +32,10 @@ export default function CustomModal({
     <View style={styles.container}>
       <Modal
         onBackdropPress={handleClose}
-        style={styles.container}
+        style={[styles.container, styleProp]}
         isVisible={isVisible}
-        onBackButtonPress={handleClose}>
+        onBackButtonPress={handleClose}
+        {...others}>
         <View style={styles.modal}>
           {withCross && (
             <TouchableOpacity style={styles.xmark} onPress={handleClose}>
@@ -40,25 +44,27 @@ export default function CustomModal({
           )}
           {title && <Title title={title} />}
           {children}
-          <View style={styles.containerButton}>
-            {withCancel && (
+          {withFooter && (
+            <View style={styles.containerButton}>
+              {withCancel && (
+                <CustomButton
+                  backgroundColor={'white'}
+                  borderColor={COLORS.red}
+                  color={COLORS.red}
+                  onPress={handleClose}
+                  title={cancelText}
+                />
+              )}
               <CustomButton
                 backgroundColor={'white'}
-                borderColor={COLORS.red}
-                color={COLORS.red}
-                onPress={handleClose}
-                title={cancelText}
+                borderColor={COLORS.darkBlue}
+                color={COLORS.blackBlue}
+                onPress={onConfirm}
+                title={submitText}
+                styleProp={styles.submitButton}
               />
-            )}
-            <CustomButton
-              backgroundColor={'white'}
-              borderColor={COLORS.darkBlue}
-              color={COLORS.blackBlue}
-              onPress={onConfirm}
-              title={submitText}
-              styleProp={styles.submitButton}
-            />
-          </View>
+            </View>
+          )}
         </View>
       </Modal>
     </View>
@@ -72,9 +78,11 @@ CustomModal.propTypes = {
   onConfirm: PropTypes.func,
   setVisible: PropTypes.func,
   submitText: PropTypes.string,
+  styleProp: PropTypes.object,
   title: PropTypes.string,
   withCancel: PropTypes.bool,
   withCross: PropTypes.bool,
+  withFooter: PropTypes.bool,
 };
 
 CustomModal.defaultProps = {
@@ -83,9 +91,11 @@ CustomModal.defaultProps = {
   onConfirm: () => {},
   setVisible: () => {},
   submitText: copy.ok,
+  styleProp: null,
   title: null,
   withCancel: true,
   withCross: true,
+  withFooter: true,
 };
 
 const styles = StyleSheet.create({
@@ -94,7 +104,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     backgroundColor: COLORS.lightBlue,
-    maxHeight: '70%',
+    // maxHeight: '70%', TODO : for now
     borderRadius: 6,
     padding: 8,
   },
