@@ -20,6 +20,7 @@ export default function CustomModal({
   title,
   withCancel,
   withCross,
+  withFooter,
   ...others
 }) {
   const handleClose = e => {
@@ -43,25 +44,27 @@ export default function CustomModal({
           )}
           {title && <Title title={title} />}
           {children}
-          <View style={styles.containerButton}>
-            {withCancel && (
+          {withFooter && (
+            <View style={styles.containerButton}>
+              {withCancel && (
+                <CustomButton
+                  backgroundColor={'white'}
+                  borderColor={COLORS.red}
+                  color={COLORS.red}
+                  onPress={handleClose}
+                  title={cancelText}
+                />
+              )}
               <CustomButton
                 backgroundColor={'white'}
-                borderColor={COLORS.red}
-                color={COLORS.red}
-                onPress={handleClose}
-                title={cancelText}
+                borderColor={COLORS.darkBlue}
+                color={COLORS.blackBlue}
+                onPress={onConfirm}
+                title={submitText}
+                styleProp={styles.submitButton}
               />
-            )}
-            <CustomButton
-              backgroundColor={'white'}
-              borderColor={COLORS.darkBlue}
-              color={COLORS.blackBlue}
-              onPress={onConfirm}
-              title={submitText}
-              styleProp={styles.submitButton}
-            />
-          </View>
+            </View>
+          )}
         </View>
       </Modal>
     </View>
@@ -79,6 +82,7 @@ CustomModal.propTypes = {
   title: PropTypes.string,
   withCancel: PropTypes.bool,
   withCross: PropTypes.bool,
+  withFooter: PropTypes.bool,
 };
 
 CustomModal.defaultProps = {
@@ -91,6 +95,7 @@ CustomModal.defaultProps = {
   title: null,
   withCancel: true,
   withCross: true,
+  withFooter: true,
 };
 
 const styles = StyleSheet.create({

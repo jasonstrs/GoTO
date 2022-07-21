@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 var cookieParser = require('cookie-parser');
 const dbFunctions = require('./db');
-const { generateToken, verifyToken } = require('./jwt');
+const { generateToken, verifyToken, resetCookie } = require('./jwt');
 const MongoClient = require('mongodb').MongoClient;
 
 app.use(express.urlencoded({ extended: true }));
@@ -59,6 +59,17 @@ app.post('/connexion', (req, res) => {
         return res.status(404).json({ success: false });
       },
     );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
+app.post('/deconnexion', (req, res) => {
+  if (db != null) {
+    resetCookie(res);
+    return res.status(200).json({ success: true });
   } else {
     res
       .status(404)

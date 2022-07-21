@@ -9,10 +9,15 @@ import CustomModal from '../modal/Modal';
 import { IMAGES } from '../../asset/img';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import ProfilItem from '../modal/ProfilItem';
+import { postLogOut } from '../../services';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../redux/features/user/userSlice';
 
 export default function Navbar() {
   const token = useSelector(state => state.user.token);
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
 
   const logoClic = () => {
     if (token) {
@@ -20,6 +25,15 @@ export default function Navbar() {
     } else {
       navigate(VIEWS.home);
     }
+  };
+
+  const handleLogOut = () => {
+    postLogOut().then(({ success }) => {
+      if (success) {
+        dispatch(setToken({ token: false }));
+        navigate(VIEWS.home);
+      }
+    });
   };
 
   return (
@@ -57,8 +71,32 @@ export default function Navbar() {
             setVisible={setShowModal}
             animationIn={'slideInRight'}
             animationOut={'slideOutRight'}
-            styleProp={styles.modal}>
-            <Text>Text</Text>
+            styleProp={styles.modal}
+            withFooter={false}
+            withCross={false}>
+            <View style={styles.containerModal}>
+              <Image style={styles.logoModal} source={IMAGES.logo} />
+              <ProfilItem
+                text={copy.deconnexion}
+                onPress={handleLogOut}
+                setVisibleModal={setShowModal}
+              />
+              <ProfilItem
+                text={copy.deconnexion}
+                onPress={handleLogOut}
+                setVisibleModal={setShowModal}
+              />
+              <ProfilItem
+                text={copy.deconnexion}
+                onPress={handleLogOut}
+                setVisibleModal={setShowModal}
+              />
+              <ProfilItem
+                text={copy.deconnexion}
+                onPress={handleLogOut}
+                setVisibleModal={setShowModal}
+              />
+            </View>
           </CustomModal>
         </View>
       )}
@@ -87,6 +125,17 @@ const styles = StyleSheet.create({
   logo: {
     height: 32,
     width: 100,
+  },
+  logoModal: {
+    height: 40,
+    width: 130,
+    marginBottom: 12,
+  },
+  containerModal: {
+    alignItems: 'center',
+    marginBottom: 12,
+    borderBottomWidth: 2,
+    borderColor: COLORS.blackBlue,
   },
   profilIcon: {
     marginRight: 8,

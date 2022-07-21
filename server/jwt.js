@@ -20,7 +20,10 @@ const verifyToken = token => {
   });
 };
 
+const resetCookie = response => response.cookie('token', null);
+
 module.exports = {
   generateToken,
+  resetCookie,
   verifyToken,
 };
