@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import ButtonLink from '../buttons/ButtonLink';
 import copy from '../../copy.json';
 import { navigate } from '../global/rootNavigation';
