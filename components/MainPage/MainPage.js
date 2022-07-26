@@ -1,10 +1,12 @@
 import React from 'react';
-import { Button } from 'react-native';
+import { Text, ScrollView, View } from 'react-native';
 
 export default function MainPage() {
-  const onClick = () => {
-    console.log('clic');
-  };
-
-  return <Button onPress={onClick} title='clic me!' />;
+  return (
+    <ScrollView>
+      <View>
+        <Text>METTRE UNE IMAGE ICI</Text>
+      </View>
+    </ScrollView>
+  );
 }
