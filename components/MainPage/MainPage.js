@@ -1,12 +1,31 @@
 import React from 'react';
-import { Text, ScrollView, View } from 'react-native';
+import { StyleSheet, ScrollView, View, Image } from 'react-native';
+import { IMAGES } from '../../asset/img';
+import copy from '../../copy.json';
+import Item from './Item';
 
 export default function MainPage() {
   return (
     <ScrollView>
       <View>
-        <Text>METTRE UNE IMAGE ICI</Text>
+        <Image style={styles.banner} source={IMAGES.banner} />
+        <View style={styles.buttons}>
+          <Item title={copy.training} />
+          <Item title={copy.results} />
+          <Item title={copy.profile} />
+          <Item title={copy.about} />
+        </View>
       </View>
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  banner: {
+    width: '100%',
+    height: 200,
+  },
+  buttons: {
+    marginTop: 16,
+  },
+});

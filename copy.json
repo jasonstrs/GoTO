@@ -26,5 +26,9 @@
   "retour": "Retour",
   "subscribe": "Inscrivez-vous",
   "writeEmail": "Adresse mail",
-  "writePassword": "Mot de passe"
+  "writePassword": "Mot de passe",
+  "about": "À propos de GoTO",
+  "results": "Mes résultats",
+  "profile": "Mon profil",
+  "training": "Mes séances"
 }
