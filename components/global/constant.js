@@ -12,6 +12,7 @@ export const VIEWS = {
   home: 'Home',
   inscription: 'Inscription',
   mainPage: 'MainPage',
+  session: 'Session',
 };
 
 export const SIZES = {
