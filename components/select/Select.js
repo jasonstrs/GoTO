@@ -8,7 +8,7 @@ export default function Select({ onChange, style, values }) {
   return (
     <View style={[styles.container, style]}>
       <RNPickerSelect
-        placeholder={{ label: 'Select you favourite language', value: null }}
+        placeholder={{}}
         onValueChange={onChange}
         items={values}
         style={styles.input}

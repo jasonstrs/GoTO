@@ -30,5 +30,7 @@
   "about": "À propos de GoTO",
   "results": "Mes résultats",
   "profile": "Mon profil",
-  "training": "Mes séances"
+  "training": "Mes séances",
+  "allMuscles": "Tout",
+  "searchMuscle": "Filtrer les séances suivant le muscle"
 }
