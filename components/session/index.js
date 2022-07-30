@@ -5,7 +5,8 @@ import copy from '../../copy.json';
 import { COLORS, SIZES } from '../global/constant';
 import Select from '../select/Select';
 import TouchableContainerWithIcons from '../container/TouchableContainerWithIcons';
-import { faPencil, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import Item from './Item';
 
 export default function Session() {
   const seances = [
@@ -35,13 +36,9 @@ export default function Session() {
 
   const onPress = id => alert(`clic on the item ${id}`);
 
-  const onCross = key => alert(`cross clicked ${key}!`);
-  const onPen = key => alert(`Pen clicked ${key}!`);
+  const onCan = key => alert(`cross clicked ${key}!`);
 
-  const icons = [
-    { onPress: onPen, source: faPencil },
-    { onPress: onCross, source: faTrashCan },
-  ];
+  const icons = [{ onPress: onCan, source: faTrashCan }];
 
   return (
     <ScrollView style={styles.container}>
@@ -59,10 +56,7 @@ export default function Session() {
           id={seance.id}
           onPress={() => onPress(seance.id)}
           icons={icons}>
-          <Text>{seance.nom}</Text>
-          <Text>Durée : {seance.duree}</Text>
-          <Text>Nombre d'exercices : {seance.muscles.length}</Text>
-          <Text>Ressenti : {seance.ressenti}</Text>
+          <Item seance={seance} />
         </TouchableContainerWithIcons>
       ))}
     </ScrollView>

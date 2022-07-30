@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    zIndex: 2,
   },
   logo: {
     marginLeft: 8,
