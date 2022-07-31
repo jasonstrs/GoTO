@@ -33,5 +33,7 @@
   "training": "Mes séances",
   "allMuscles": "Tous les muscles",
   "searchMuscle": "Filtrer les séances suivant le muscle",
-  "minutes": "minutes"
+  "minutes": "minutes",
+  "seance.modal.remove": "Supprimer la séance",
+  "seance.modal.sure": "Êtes-vous sur de vouloir supprimer cette séance ?"
 }

@@ -8,11 +8,13 @@ import TouchableContainerWithIcons from '../container/TouchableContainerWithIcon
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Item from './Item';
 import { getMuscles, getSeances, removeSeance } from '../../services';
+import CustomModal from '../modal/Modal';
 
 export default function Session() {
   const [selectedMuscle, setSelectedMuscle] = useState(null);
   const [muscles, setMuscles] = useState([]);
   const [seances, setSeances] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     const defaultMuscle = { label: copy.allMuscles, value: 'all' };
@@ -23,14 +25,15 @@ export default function Session() {
 
   const onPress = id => alert(`clic on the item ${id}`);
 
-  const onCan = id =>
-    removeSeance(id).then(({ data }) => {
+  const onCan = () =>
+    removeSeance(selectedId).then(({ data }) => {
+      setSelectedId(null);
       if (data.acknowledged === true && data.deletedCount === 1) {
-        setSeances(seances.filter(seance => seance.id !== id));
+        setSeances(seances.filter(seance => seance.id !== selectedId));
       }
     });
 
-  const icons = [{ onPress: onCan, source: faTrashCan }];
+  const icons = [{ onPress: setSelectedId, source: faTrashCan }];
 
   return (
     <ScrollView style={styles.container}>
@@ -56,6 +59,15 @@ export default function Session() {
           <Item seance={seance} />
         </TouchableContainerWithIcons>
       ))}
+      <CustomModal
+        cancelText={copy.annuler}
+        isVisible={Boolean(selectedId)}
+        onConfirm={onCan}
+        setVisible={setSelectedId}
+        submitText={copy.confirmer}
+        title={copy['seance.modal.remove']}>
+        <Text>{copy['seance.modal.sure']}</Text>
+      </CustomModal>
     </ScrollView>
   );
 }
