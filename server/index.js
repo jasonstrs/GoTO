@@ -64,13 +64,15 @@ app.get('/seances', (req, res) => {
 
 app.delete('/seance/:id', (req, res) => {
   if (db != null) {
-    const id = req.params.id;
-    // TODO: compléter le then
-    dbFunctions.removeSeance(db, id).then(
-      data => {
-        return res.status(200).json({ data });
+    verifyToken(req.cookies.token).then(
+      user => {
+        const idSeance = req.params.id;
+        dbFunctions.removeSeance(db, idSeance, user.id).then(
+          data => res.status(200).json({ data }),
+          err => res.status(404).json({ erreur: err }),
+        );
       },
-      err => res.status(404).json({ erreur: err }),
+      () => res.status(404).json({ success: false }),
     );
   } else {
     res

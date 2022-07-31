@@ -44,15 +44,14 @@ const getSeances = (db, userId) => {
 
 const removeSeance = (db, idSeance, userId) => {
   return new Promise((resolve, reject) => {
-    // TODO  : à faire
-    db.collection('muscle')
-      .find({ _id: ObjectId(idSeance), userId })
-      .toArray((err, docs) => {
-        if (err) {
-          return reject(err); // Reject the Promise with an error
-        }
-        return resolve(docs); // Resolve (or fulfill) the promise with data
-      });
+    try {
+      db.collection('seance')
+        .deleteOne({ _id: ObjectId(idSeance), userId })
+        .then(data => resolve(data));
+    } catch (e) {
+      console.log(`ERROR :: ${e}`);
+      reject(e);
+    }
   });
 };
 

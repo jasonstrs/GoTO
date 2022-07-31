@@ -7,7 +7,7 @@ import Select from '../select/Select';
 import TouchableContainerWithIcons from '../container/TouchableContainerWithIcons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Item from './Item';
-import { getMuscles, getSeances } from '../../services';
+import { getMuscles, getSeances, removeSeance } from '../../services';
 
 export default function Session() {
   const [selectedMuscle, setSelectedMuscle] = useState(null);
@@ -23,7 +23,12 @@ export default function Session() {
 
   const onPress = id => alert(`clic on the item ${id}`);
 
-  const onCan = key => alert(`cross clicked ${key}!`);
+  const onCan = id =>
+    removeSeance(id).then(({ data }) => {
+      if (data.acknowledged === true && data.deletedCount === 1) {
+        setSeances(seances.filter(seance => seance.id !== id));
+      }
+    });
 
   const icons = [{ onPress: onCan, source: faTrashCan }];
 
