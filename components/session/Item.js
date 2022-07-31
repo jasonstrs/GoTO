@@ -13,11 +13,11 @@ export default function Item({ seance }) {
       </Text>
       <Text>
         <Text style={styles.label}>Nombre d'exercices : </Text>
-        <Text>{seance.muscles.length}</Text>
+        <Text>{seance.nbExercices}</Text>
       </Text>
       <Text>
         <Text style={styles.label}>Ressenti : </Text>
-        <Text>{seance.ressenti}</Text>
+        <Text>{copy[`ressenti.${seance.ressenti}`]}</Text>
       </Text>
     </View>
   );

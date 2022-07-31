@@ -28,6 +28,7 @@ export const SHAPES = {
     duree: PropTypes.number,
     id: PropTypes.string,
     muscles: PropTypes.arrayOf(PropTypes.string),
+    nbExercices: PropTypes.number,
     nom: PropTypes.string,
     ressenti: PropTypes.string,
   }),

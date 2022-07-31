@@ -59,6 +59,9 @@ export default function Session() {
           <Item seance={seance} />
         </TouchableContainerWithIcons>
       ))}
+      {!seances.length && (
+        <Text style={styles.noTraining}>{copy['seance.create']}</Text>
+      )}
       <CustomModal
         cancelText={copy.annuler}
         isVisible={Boolean(selectedId)}
@@ -81,5 +84,8 @@ const styles = StyleSheet.create({
   },
   select: {
     marginBottom: 16,
+  },
+  noTraining: {
+    textAlign: 'justify',
   },
 });
