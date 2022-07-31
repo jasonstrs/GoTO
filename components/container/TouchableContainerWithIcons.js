@@ -15,6 +15,7 @@ export default function TouchableContainerWithIcons({
       <View style={styles.icons}>
         {icons.map(icon => (
           <TouchableOpacity
+            key={icon.source}
             style={styles.logo}
             onPress={() => icon.onPress(id)}>
             <FontAwesomeIcon icon={icon.source} />
@@ -29,19 +30,18 @@ export default function TouchableContainerWithIcons({
 TouchableContainerWithIcons.propTypes = {
   children: PropTypes.node.isRequired,
   icons: PropTypes.arrayOf(
-    PropTypes.objectOf(
-      PropTypes.shape({
-        onPress: PropTypes.func,
-        source: PropTypes.object,
-      }),
-    ),
+    PropTypes.shape({
+      onPress: PropTypes.func,
+      source: PropTypes.object,
+    }),
   ),
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   onPress: PropTypes.func,
 };
 
 TouchableContainerWithIcons.defaultProps = {
   icons: [],
+  id: null,
   onPress: () => {},
 };
 

@@ -31,6 +31,7 @@
   "results": "Mes résultats",
   "profile": "Mon profil",
   "training": "Mes séances",
-  "allMuscles": "Tout",
-  "searchMuscle": "Filtrer les séances suivant le muscle"
+  "allMuscles": "Tous les muscles",
+  "searchMuscle": "Filtrer les séances suivant le muscle",
+  "minutes": "minutes"
 }

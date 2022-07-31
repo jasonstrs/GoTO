@@ -1,3 +1,5 @@
+import { parseArray, parseSeance } from './parser';
+
 const getRequest = async url => {
   const data = await fetch(url).then(
     res => res.json(),
@@ -27,6 +29,18 @@ const postRequest = async (url, body) => {
 export const getAccueil = () => {
   const url = 'http://localhost:8080/accueil';
   return getRequest(url);
+};
+
+export const getMuscles = () => {
+  const url = 'http://localhost:8080/muscles';
+  return getRequest(url);
+};
+
+export const getSeances = () => {
+  const url = 'http://localhost:8080/seances';
+  return getRequest(url).then(({ data }) => ({
+    data: parseArray(data, parseSeance),
+  }));
 };
 
 export const postUser = body => {

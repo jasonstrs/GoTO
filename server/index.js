@@ -29,6 +29,56 @@ app.get('/accueil', (req, res) => {
   }
 });
 
+/* SEANCES */
+app.get('/muscles', (req, res) => {
+  if (db != null) {
+    dbFunctions.getMuscles(db).then(
+      data => {
+        return res.status(200).json({ data });
+      },
+      err => res.status(404).json({ erreur: err }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
+app.get('/seances', (req, res) => {
+  if (db != null) {
+    verifyToken(req.cookies.token).then(
+      user =>
+        dbFunctions.getSeances(db, user.id).then(
+          data => res.status(200).json({ data }),
+          err => res.status(404).json({ erreur: err }),
+        ),
+      () => res.status(404).json({ success: false }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
+app.delete('/seance/:id', (req, res) => {
+  if (db != null) {
+    const id = req.params.id;
+    // TODO: compléter le then
+    dbFunctions.removeSeance(db, id).then(
+      data => {
+        return res.status(200).json({ data });
+      },
+      err => res.status(404).json({ erreur: err }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
 /* USER */
 app.post('/user', (req, res) => {
   if (db != null) {
@@ -50,8 +100,12 @@ app.post('/user', (req, res) => {
 app.post('/connexion', (req, res) => {
   if (db != null) {
     dbFunctions.connexion(db, req.body).then(
-      ({ password, ...other }) => {
-        generateToken(other, res);
+      ({ password, _id, ...other }) => {
+        const payload = {
+          ...other,
+          id: _id.toString(),
+        };
+        generateToken(payload, res);
 
         return res.status(200).json({ success: true });
       },

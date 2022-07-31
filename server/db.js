@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const { ObjectId } = require('mongodb');
 const url = 'mongodb://localhost:27017'; // Connection URL
 const dbName = 'GoTO'; // Database Name
 
@@ -6,6 +7,46 @@ const getAccueil = db => {
   return new Promise((resolve, reject) => {
     db.collection('accueil')
       .find()
+      .toArray((err, docs) => {
+        if (err) {
+          return reject(err); // Reject the Promise with an error
+        }
+        return resolve(docs); // Resolve (or fulfill) the promise with data
+      });
+  });
+};
+
+const getMuscles = db => {
+  return new Promise((resolve, reject) => {
+    db.collection('muscle')
+      .find()
+      .toArray((err, docs) => {
+        if (err) {
+          return reject(err); // Reject the Promise with an error
+        }
+        return resolve(docs); // Resolve (or fulfill) the promise with data
+      });
+  });
+};
+
+const getSeances = (db, userId) => {
+  return new Promise((resolve, reject) => {
+    db.collection('seance')
+      .find({ userId })
+      .toArray((err, docs) => {
+        if (err) {
+          return reject(err); // Reject the Promise with an error
+        }
+        return resolve(docs); // Resolve (or fulfill) the promise with data
+      });
+  });
+};
+
+const removeSeance = (db, idSeance, userId) => {
+  return new Promise((resolve, reject) => {
+    // TODO  : à faire
+    db.collection('muscle')
+      .find({ _id: ObjectId(idSeance), userId })
       .toArray((err, docs) => {
         if (err) {
           return reject(err); // Reject the Promise with an error
@@ -68,6 +109,9 @@ module.exports = {
   connexion,
   dbName,
   getAccueil,
+  getMuscles,
+  getSeances,
+  removeSeance,
   insertUser,
   url,
 };

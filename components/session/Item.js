@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { COLORS, SHAPES } from '../global/constant';
+import copy from '../../copy.json';
 
 export default function Item({ seance }) {
   return (
@@ -8,7 +9,7 @@ export default function Item({ seance }) {
       <Text style={styles.title}>{seance.nom}</Text>
       <Text>
         <Text style={styles.label}>Durée : </Text>
-        <Text>{seance.duree}</Text>
+        <Text>{`${seance.duree} ${copy.minutes}`}</Text>
       </Text>
       <Text>
         <Text style={styles.label}>Nombre d'exercices : </Text>

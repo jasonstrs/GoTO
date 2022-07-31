@@ -4,10 +4,11 @@ import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet, View } from 'react-native';
 import { COLORS } from '../global/constant';
 
-export default function Select({ onChange, style, values }) {
+export default function Select({ onChange, style, value, values }) {
   return (
     <View style={[styles.container, style]}>
       <RNPickerSelect
+        value={value}
         placeholder={{}}
         onValueChange={onChange}
         items={values}
@@ -20,12 +21,14 @@ export default function Select({ onChange, style, values }) {
 Select.propTypes = {
   onChange: PropTypes.func,
   style: PropTypes.object,
+  value: PropTypes.string,
   values: PropTypes.arrayOf(PropTypes.object),
 };
 
 Select.defaultProps = {
   onChange: () => {},
   style: {},
+  value: null,
   values: [],
 };
 

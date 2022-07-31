@@ -25,7 +25,7 @@ export const SIZES = {
 
 export const SHAPES = {
   seanceShape: PropTypes.shape({
-    duree: PropTypes.string,
+    duree: PropTypes.number,
     id: PropTypes.string,
     muscles: PropTypes.arrayOf(PropTypes.string),
     nom: PropTypes.string,
