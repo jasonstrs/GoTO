@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const COLORS = {
   blackBlue: '#0335d3',
   blue: '#82affc',
@@ -12,10 +14,22 @@ export const VIEWS = {
   home: 'Home',
   inscription: 'Inscription',
   mainPage: 'MainPage',
+  session: 'Session',
 };
 
 export const SIZES = {
   big: 24,
   extraBig: 28,
   normal: 16,
+};
+
+export const SHAPES = {
+  seanceShape: PropTypes.shape({
+    duree: PropTypes.number,
+    id: PropTypes.string,
+    muscles: PropTypes.arrayOf(PropTypes.string),
+    nbExercices: PropTypes.number,
+    nom: PropTypes.string,
+    ressenti: PropTypes.string,
+  }),
 };

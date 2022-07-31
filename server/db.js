@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const { ObjectId } = require('mongodb');
 const url = 'mongodb://localhost:27017'; // Connection URL
 const dbName = 'GoTO'; // Database Name
 
@@ -12,6 +13,45 @@ const getAccueil = db => {
         }
         return resolve(docs); // Resolve (or fulfill) the promise with data
       });
+  });
+};
+
+const getMuscles = db => {
+  return new Promise((resolve, reject) => {
+    db.collection('muscle')
+      .find()
+      .toArray((err, docs) => {
+        if (err) {
+          return reject(err); // Reject the Promise with an error
+        }
+        return resolve(docs); // Resolve (or fulfill) the promise with data
+      });
+  });
+};
+
+const getSeances = (db, userId) => {
+  return new Promise((resolve, reject) => {
+    db.collection('seance')
+      .find({ userId })
+      .toArray((err, docs) => {
+        if (err) {
+          return reject(err); // Reject the Promise with an error
+        }
+        return resolve(docs); // Resolve (or fulfill) the promise with data
+      });
+  });
+};
+
+const removeSeance = (db, idSeance, userId) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.collection('seance')
+        .deleteOne({ _id: ObjectId(idSeance), userId })
+        .then(data => resolve(data));
+    } catch (e) {
+      console.log(`ERROR :: ${e}`);
+      reject(e);
+    }
   });
 };
 
@@ -68,6 +108,9 @@ module.exports = {
   connexion,
   dbName,
   getAccueil,
+  getMuscles,
+  getSeances,
+  removeSeance,
   insertUser,
   url,
 };
