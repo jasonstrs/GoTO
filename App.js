@@ -23,6 +23,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setToken } from './redux/features/user/userSlice';
 import MainPage from './components/mainPage/MainPage';
 import Session from './components/session';
+import { Root } from 'react-native-alert-notification';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,42 +33,46 @@ const App = () => {
 
   useEffect(() => {
     checkToken().then(({ success }) => {
-      dispatch(setToken({ token: success }));
+      if (success) {
+        dispatch(setToken({ token: success }));
+      }
     });
   }, [dispatch]);
 
   return (
-    <NavigationContainer ref={navigationRef}>
-      <SafeAreaView style={styles.container}>
-        <Navbar />
-        {token === null ? (
-          <Loading />
-        ) : (
-          <Stack.Navigator
-            initialRouteName={VIEWS.home}
-            screenOptions={{
-              contentStyle: { backgroundColor: COLORS.lightBlue },
-              headerShown: false,
-            }}>
-            {token === true ? (
-              <>
-                <Stack.Screen name={VIEWS.mainPage} component={MainPage} />
-                <Stack.Screen name={VIEWS.session} component={Session} />
-              </>
-            ) : (
-              <>
-                <Stack.Screen name={VIEWS.home} component={Home} />
-                <Stack.Screen name={VIEWS.connexion} component={Connexion} />
-                <Stack.Screen
-                  name={VIEWS.inscription}
-                  component={Inscription}
-                />
-              </>
-            )}
-          </Stack.Navigator>
-        )}
-      </SafeAreaView>
-    </NavigationContainer>
+    <Root>
+      <NavigationContainer ref={navigationRef}>
+        <SafeAreaView style={styles.container}>
+          <Navbar />
+          {token === null ? (
+            <Loading />
+          ) : (
+            <Stack.Navigator
+              initialRouteName={VIEWS.home}
+              screenOptions={{
+                contentStyle: { backgroundColor: COLORS.lightBlue },
+                headerShown: false,
+              }}>
+              {token === true ? (
+                <>
+                  <Stack.Screen name={VIEWS.mainPage} component={MainPage} />
+                  <Stack.Screen name={VIEWS.session} component={Session} />
+                </>
+              ) : (
+                <>
+                  <Stack.Screen name={VIEWS.home} component={Home} />
+                  <Stack.Screen name={VIEWS.connexion} component={Connexion} />
+                  <Stack.Screen
+                    name={VIEWS.inscription}
+                    component={Inscription}
+                  />
+                </>
+              )}
+            </Stack.Navigator>
+          )}
+        </SafeAreaView>
+      </NavigationContainer>
+    </Root>
   );
 };
 

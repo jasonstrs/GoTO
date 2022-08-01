@@ -1,3 +1,4 @@
+import { alertWarning } from '../components/global/constant';
 import { URLS } from './constant';
 import { parseArray, parseSeance } from './parser';
 
@@ -5,8 +6,8 @@ const getRequest = async url => {
   const data = await fetch(url).then(
     res => res.json(),
     err => {
-      console.log(`erreur : ${err}`);
-      return null;
+      alertWarning(err.message);
+      return { success: false };
     },
   );
   return data;
@@ -20,8 +21,8 @@ const postRequest = async (url, body) => {
   }).then(
     res => res.json(),
     err => {
-      console.log(`erreur : ${err}`);
-      return null;
+      alertWarning(err.message);
+      return { success: false };
     },
   );
   return data;
@@ -35,8 +36,8 @@ const deleteRequest = async (url, body = {}) => {
   }).then(
     res => res.json(),
     err => {
-      console.log(`erreur : ${err}`);
-      return null;
+      alertWarning(err.message);
+      return { success: false };
     },
   );
   return data;

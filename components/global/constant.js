@@ -1,4 +1,13 @@
 import PropTypes from 'prop-types';
+import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
+
+export const alertWarning = message =>
+  Dialog.show({
+    type: ALERT_TYPE.WARNING,
+    title: 'Une erreur est survenue 🥲',
+    textBody: message,
+    button: 'close',
+  });
 
 export const COLORS = {
   blackBlue: '#0335d3',
