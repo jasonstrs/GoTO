@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, StyleSheet, View } from 'react-native';
 import Title from '../header/Title';
 import copy from '../../copy.json';
-import { COLORS, SIZES } from '../global/constant';
+import { COLORS, SIZES, VIEWS } from '../global/constant';
 import Select from '../select/Select';
 import TouchableContainerWithIcons from '../container/TouchableContainerWithIcons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Item from './Item';
 import { getMuscles, getSeances, removeSeance } from '../../services';
 import CustomModal from '../modal/Modal';
+import CustomButton from '../buttons/CustomButton';
+import { navigate } from '../global/rootNavigation';
 
 export default function Session() {
   const [selectedMuscle, setSelectedMuscle] = useState(null);
@@ -42,6 +44,14 @@ export default function Session() {
         size={SIZES.extraBig}
         title={`${copy.training} 🦊`}
       />
+      <View style={styles.buttonContainer}>
+        <CustomButton
+          borderColor={'black'}
+          onPress={() => navigate(VIEWS.addSeance)}
+          title={'Ajouter une séance  ⚒'}
+          color={'black'}
+        />
+      </View>
       <Text style={styles.text}>{copy.searchMuscle}</Text>
       <View style={styles.select}>
         <Select
@@ -83,9 +93,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   select: {
-    marginBottom: 16,
+    marginBottom: 8,
   },
   noTraining: {
     textAlign: 'justify',
+  },
+  buttonContainer: {
+    alignItems: 'flex-end',
   },
 });

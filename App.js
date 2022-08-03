@@ -24,6 +24,7 @@ import { setToken } from './redux/features/user/userSlice';
 import MainPage from './components/mainPage/MainPage';
 import Session from './components/session';
 import { Root } from 'react-native-alert-notification';
+import AddSeance from './components/session/AddSeance';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +58,7 @@ const App = () => {
                 <>
                   <Stack.Screen name={VIEWS.mainPage} component={MainPage} />
                   <Stack.Screen name={VIEWS.session} component={Session} />
+                  <Stack.Screen name={VIEWS.addSeance} component={AddSeance} />
                 </>
               ) : (
                 <>
