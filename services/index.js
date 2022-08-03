@@ -55,7 +55,10 @@ export const getSeances = () => {
 
 export const removeSeance = id => deleteRequest(URLS.seance(id));
 
-export const postSeance = body => postRequest(URLS.seance(), body);
+export const postSeance = body =>
+  postRequest(URLS.seance(), body).then(({ data }) => ({
+    data: parseSeance(data),
+  }));
 
 export const postUser = body => postRequest(URLS.user, body);
 

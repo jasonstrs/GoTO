@@ -56,7 +56,7 @@ const insertSeance = (db, name, userId) => {
       if (err) {
         return reject(err);
       }
-      return resolve(seanceInserted.insertedId);
+      return resolve({ ...seance, _id: seanceInserted.insertedId });
     });
   });
 };

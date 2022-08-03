@@ -66,7 +66,6 @@ app.post('/seance', (req, res) => {
   if (db != null) {
     verifyToken(req.cookies.token).then(
       user => {
-        console.log(req.body.name, user.id);
         dbFunctions.insertSeance(db, req.body.name, user.id).then(
           data => res.status(201).json({ data }),
           err => res.status(404).json({ erreur: err }),

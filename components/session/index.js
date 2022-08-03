@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   setMuscles,
   setSeances,
+  removeSeance as removeSeanceRedux,
 } from '../../redux/features/training/trainingSlice';
 
 export default function Session() {
@@ -38,10 +39,10 @@ export default function Session() {
 
   const onCan = () =>
     removeSeance(selectedId).then(({ data }) => {
-      setSelectedId(null);
       if (data.acknowledged === true && data.deletedCount === 1) {
-        setSeances(seances.filter(seance => seance.id !== selectedId));
+        dispatch(removeSeanceRedux({ id: selectedId }));
       }
+      setSelectedId(null);
     });
 
   const icons = [{ onPress: setSelectedId, source: faTrashCan }];
@@ -97,6 +98,7 @@ export default function Session() {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    marginBottom: 16,
   },
   text: {
     marginBottom: 8,

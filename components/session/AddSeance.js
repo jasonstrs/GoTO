@@ -7,9 +7,9 @@ import CustomTextInput from '../input/CustomTextInput';
 import CustomButton from '../buttons/CustomButton';
 import { COLORS, SIZES, VIEWS } from '../global/constant';
 import Title from '../header/Title';
-import { getSeances, postSeance } from '../../services';
+import { postSeance } from '../../services';
 import { useDispatch } from 'react-redux';
-import { setSeances } from '../../redux/features/training/trainingSlice';
+import { addSeance } from '../../redux/features/training/trainingSlice';
 
 export default function AddSeance({ isEdit, name, navigation }) {
   const {
@@ -22,8 +22,8 @@ export default function AddSeance({ isEdit, name, navigation }) {
   const dispatch = useDispatch();
 
   const onAddSession = body =>
-    postSeance(body).then(() => {
-      getSeances().then(({ data }) => dispatch(setSeances({ seances: data })));
+    postSeance(body).then(({ data }) => {
+      dispatch(addSeance({ seance: data }));
       navigation.navigate(VIEWS.session);
     });
 
