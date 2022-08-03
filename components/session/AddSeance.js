@@ -5,10 +5,13 @@ import { Controller, useForm } from 'react-hook-form';
 import copy from '../../copy.json';
 import CustomTextInput from '../input/CustomTextInput';
 import CustomButton from '../buttons/CustomButton';
-import { COLORS, SIZES } from '../global/constant';
+import { COLORS, SIZES, VIEWS } from '../global/constant';
 import Title from '../header/Title';
+import { getSeances, postSeance } from '../../services';
+import { useDispatch } from 'react-redux';
+import { setSeances } from '../../redux/features/training/trainingSlice';
 
-export default function AddSeance({ isEdit, onSubmit, name }) {
+export default function AddSeance({ isEdit, name, navigation }) {
   const {
     control,
     handleSubmit,
@@ -16,6 +19,13 @@ export default function AddSeance({ isEdit, onSubmit, name }) {
   } = useForm({
     defaultValues: { name },
   });
+  const dispatch = useDispatch();
+
+  const onAddSession = body =>
+    postSeance(body).then(() => {
+      getSeances().then(({ data }) => dispatch(setSeances({ seances: data })));
+      navigation.navigate(VIEWS.session);
+    });
 
   return (
     <ScrollView style={styles.container}>
@@ -47,7 +57,7 @@ export default function AddSeance({ isEdit, onSubmit, name }) {
             backgroundColor={COLORS.blue}
             borderColor={COLORS.darkBlue}
             color={COLORS.blackBlue}
-            onPress={handleSubmit(onSubmit)}
+            onPress={handleSubmit(onAddSession)}
             title={isEdit ? copy.edit : copy.add}
           />
         </View>
@@ -59,7 +69,6 @@ export default function AddSeance({ isEdit, onSubmit, name }) {
 AddSeance.propTypes = {
   isEdit: PropTypes.bool,
   name: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired,
 };
 
 AddSeance.defaultProps = {

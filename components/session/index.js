@@ -11,19 +11,28 @@ import { getMuscles, getSeances, removeSeance } from '../../services';
 import CustomModal from '../modal/Modal';
 import CustomButton from '../buttons/CustomButton';
 import { navigate } from '../global/rootNavigation';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setMuscles,
+  setSeances,
+} from '../../redux/features/training/trainingSlice';
 
 export default function Session() {
+  const dispatch = useDispatch();
+  const { muscles, seances } = useSelector(state => state.training);
   const [selectedMuscle, setSelectedMuscle] = useState(null);
-  const [muscles, setMuscles] = useState([]);
-  const [seances, setSeances] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     const defaultMuscle = { label: copy.allMuscles, value: 'all' };
     setSelectedMuscle(defaultMuscle.value);
-    getMuscles().then(({ data }) => setMuscles([defaultMuscle, ...data]));
-    getSeances().then(({ data }) => setSeances(data));
-  }, []);
+
+    getMuscles().then(({ data }) =>
+      dispatch(setMuscles({ muscles: [defaultMuscle, ...data] })),
+    );
+
+    getSeances().then(({ data }) => dispatch(setSeances({ seances: data })));
+  }, [dispatch]);
 
   const onPress = id => alert(`clic on the item ${id}`);
 

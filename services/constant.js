@@ -4,7 +4,7 @@ export const URLS = {
   deconnexion: 'http://localhost:8080/deconnexion',
   muscles: 'http://localhost:8080/muscles',
   seances: 'http://localhost:8080/seances',
-  seance: id => `http://localhost:8080/seance/${id}`,
+  seance: (id = null) => `http://localhost:8080/seance${id ? `/${id}` : ''}`,
   token: 'http://localhost:8080/token',
   user: 'http://localhost:8080/user',
 };

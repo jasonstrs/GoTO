@@ -39,6 +39,7 @@
   "seance.create": "Vous n'avez pas encore créé de séance. Vous pouvez dès maintenant en créer une à l'aide du bouton \"Ajouter\" ci-dessus.",
   "ressenti.mal": "Mal",
   "ressenti.bien": "Bien",
+  "ressenti.aucun": "Pas de ressenti",
   "add": "Ajouter",
   "edit": "Modifier",
   "trainingName": "Nom de la séance",
