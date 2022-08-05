@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import CustomTextInput from '../input/CustomTextInput';
 import copy from '../../copy.json';
@@ -16,6 +16,7 @@ import { setToken } from '../../redux/features/user/userSlice';
 import CustomModal from '../modal/Modal';
 import ForgottenPassword from './ForgottenPassword';
 import PasswordSent from './PasswordSent';
+import Container from '../global/Container';
 
 export default function Connexion({ navigation, route }) {
   const [showBanner, setShowBanner] = useState(false);
@@ -72,7 +73,7 @@ export default function Connexion({ navigation, route }) {
   };
 
   return (
-    <ScrollView>
+    <Container>
       <View style={styles.container}>
         {showBanner && (
           <Banner
@@ -168,14 +169,11 @@ export default function Connexion({ navigation, route }) {
           <ForgottenPassword control={controlModal} errors={errorsModal} />
         )}
       </CustomModal>
-    </ScrollView>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 16,
-  },
   buttonContainer: {
     alignItems: 'flex-end',
   },

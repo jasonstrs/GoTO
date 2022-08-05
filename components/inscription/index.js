@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import Container from '../global/Container';
 import { Controller, useForm } from 'react-hook-form';
 import CustomTextInput from '../input/CustomTextInput';
 import CustomButton from '../buttons/CustomButton';
@@ -40,7 +41,7 @@ export default function Inscription({ navigation }) {
   };
 
   return (
-    <ScrollView>
+    <Container>
       <View style={styles.container}>
         {showBanner && (
           <Banner
@@ -155,14 +156,11 @@ export default function Inscription({ navigation }) {
           />
         </Text>
       </View>
-    </ScrollView>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 16,
-  },
   buttonContainer: {
     alignItems: 'flex-end',
   },

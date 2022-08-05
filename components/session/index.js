@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import Title from '../header/Title';
 import copy from '../../copy.json';
 import { COLORS, SIZES, VIEWS } from '../global/constant';
@@ -17,6 +17,7 @@ import {
   setSeances,
   removeSeance as removeSeanceRedux,
 } from '../../redux/features/training/trainingSlice';
+import Container from '../global/Container';
 
 export default function Session() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ export default function Session() {
   const icons = [{ onPress: setSelectedId, source: faTrashCan }];
 
   return (
-    <ScrollView style={styles.container}>
+    <Container>
       <Title
         color={COLORS.blackBlue}
         size={SIZES.extraBig}
@@ -91,15 +92,11 @@ export default function Session() {
         title={copy['seance.modal.remove']}>
         <Text>{copy['seance.modal.sure']}</Text>
       </CustomModal>
-    </ScrollView>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    marginBottom: 16,
-  },
   text: {
     marginBottom: 8,
   },
