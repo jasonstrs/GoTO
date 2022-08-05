@@ -9,7 +9,7 @@ import CustomModal from '../modal/Modal';
 import { IMAGES } from '../../asset/img';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import ProfilItem from '../modal/ProfilItem';
+import ProfilItem from './ProfilItem';
 import { postLogOut } from '../../services';
 import { useDispatch } from 'react-redux';
 import { setToken } from '../../redux/features/user/userSlice';
