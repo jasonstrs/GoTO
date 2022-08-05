@@ -57,17 +57,17 @@ export default function Session() {
       <View style={styles.buttonContainer}>
         <CustomButton
           borderColor={'black'}
+          color={'black'}
           onPress={() => navigate(VIEWS.addSeance)}
           title={'Ajouter une séance  ⚒'}
-          color={'black'}
         />
       </View>
       <Text style={styles.text}>{copy.searchMuscle}</Text>
       <View style={styles.select}>
         <Select
+          onChange={setSelectedMuscle}
           value={selectedMuscle}
           values={muscles}
-          onChange={setSelectedMuscle}
         />
       </View>
       {seances.map(seance => (

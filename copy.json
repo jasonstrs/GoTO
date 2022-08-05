@@ -44,5 +44,6 @@
   "edit": "Modifier",
   "trainingName": "Nom de la séance",
   "create": "Création",
-  "session.create.description": "Lorsque tu auras créé ta séance, tu pourras la compléter en y ajoutant des exercices."
+  "session.create.description": "Lorsque tu auras créé ta séance, tu pourras la compléter en y ajoutant des exercices.",
+  "back": "Retour"
 }

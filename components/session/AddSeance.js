@@ -54,10 +54,18 @@ export default function AddSeance({ isEdit, name, navigation }) {
         />
         <View style={styles.buttonContainer}>
           <CustomButton
-            backgroundColor={COLORS.blue}
+            backgroundColor={'white'}
+            borderColor={COLORS.red}
+            color={COLORS.red}
+            onPress={() => navigation.navigate(VIEWS.session)}
+            title={copy.back}
+          />
+          <CustomButton
+            backgroundColor={'white'}
             borderColor={COLORS.darkBlue}
             color={COLORS.blackBlue}
             onPress={handleSubmit(onAddSession)}
+            styleProp={styles.addButton}
             title={isEdit ? copy.edit : copy.add}
           />
         </View>
@@ -85,6 +93,10 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
   },
   buttonContainer: {
-    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+  },
+  addButton: {
+    marginLeft: 12,
   },
 });
