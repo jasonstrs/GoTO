@@ -13,19 +13,20 @@ export default function CustomTextInput({
   value,
 }) {
   const WIDTH = children == null ? '100%' : '90%';
-  const borderColor = Object.keys(errors).length ? COLORS.red : COLORS.darkBlue;
+  const color = Object.keys(errors).length ? COLORS.red : COLORS.darkBlue;
+
   const styles = StyleSheet.create({
     container: {
       marginBottom: 16,
     },
     label: {
-      color: COLORS.darkBlue,
+      color: color,
       fontSize: 18,
       marginBottom: 6,
     },
     input: {
       backgroundColor: COLORS.blue,
-      borderColor: borderColor,
+      borderColor: color,
       borderRadius: 8,
       borderWidth: 2,
       marginBottom: 4,

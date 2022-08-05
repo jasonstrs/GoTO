@@ -19,6 +19,7 @@ export const COLORS = {
 };
 
 export const VIEWS = {
+  addSeance: 'AddSeance',
   connexion: 'Connexion',
   home: 'Home',
   inscription: 'Inscription',

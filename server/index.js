@@ -62,6 +62,24 @@ app.get('/seances', (req, res) => {
   }
 });
 
+app.post('/seance', (req, res) => {
+  if (db != null) {
+    verifyToken(req.cookies.token).then(
+      user => {
+        dbFunctions.insertSeance(db, req.body.name, user.id).then(
+          data => res.status(201).json({ data }),
+          err => res.status(404).json({ erreur: err }),
+        );
+      },
+      () => res.status(404).json({ success: false }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
 app.delete('/seance/:id', (req, res) => {
   if (db != null) {
     verifyToken(req.cookies.token).then(

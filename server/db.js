@@ -42,6 +42,25 @@ const getSeances = (db, userId) => {
   });
 };
 
+const insertSeance = (db, name, userId) => {
+  return new Promise((resolve, reject) => {
+    const seance = {
+      nom: name,
+      muscles: [],
+      ressenti: 'aucun',
+      userId,
+      duree: 0,
+      nbExercices: 0,
+    };
+    db.collection('seance').insertOne(seance, (err, seanceInserted) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve({ ...seance, _id: seanceInserted.insertedId });
+    });
+  });
+};
+
 const removeSeance = (db, idSeance, userId) => {
   return new Promise((resolve, reject) => {
     try {
@@ -110,6 +129,7 @@ module.exports = {
   getAccueil,
   getMuscles,
   getSeances,
+  insertSeance,
   removeSeance,
   insertUser,
   url,
