@@ -119,6 +119,26 @@ app.get('/seance/:id/exercices', (req, res) => {
   }
 });
 
+// TODO à tester
+app.delete('/seance/:id/exercice/:idExo', (req, res) => {
+  if (db != null) {
+    verifyToken(req.cookies.token).then(
+      user => {
+        const idExercice = req.params.idExo;
+        dbFunctions.removeExercice(db, idExercice, user.id).then(
+          data => res.status(200).json({ data }),
+          err => res.status(404).json({ erreur: err }),
+        );
+      },
+      () => res.status(404).json({ success: false }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
 /* USER */
 app.post('/user', (req, res) => {
   if (db != null) {

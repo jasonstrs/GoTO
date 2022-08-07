@@ -68,6 +68,9 @@ export const getExercices = async idSeance => {
   };
 };
 
+export const removeExercice = (idSeance, idExercice) =>
+  deleteRequest(URLS.exercice(idSeance, idExercice));
+
 export const postUser = body => postRequest(URLS.user, body);
 
 export const postConnexion = body => postRequest(URLS.connexion, body);

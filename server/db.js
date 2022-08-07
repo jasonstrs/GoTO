@@ -93,6 +93,20 @@ const getExercicesOfSeance = (db, idSeance, userId) => {
   });
 };
 
+// TODO: à tester
+const removeExercice = (db, idExercice, userId) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.collection('exercice')
+        .deleteOne({ _id: ObjectId(idExercice), userId })
+        .then(data => resolve(data));
+    } catch (e) {
+      console.log(`ERROR :: ${e}`);
+      reject(e);
+    }
+  });
+};
+
 const insertUser = (db, user) => {
   return new Promise((resolve, reject) => {
     hashPassword(user.password).then(
@@ -151,6 +165,7 @@ module.exports = {
   insertSeance,
   removeSeance,
   getExercicesOfSeance,
+  removeExercice,
   insertUser,
   url,
 };
