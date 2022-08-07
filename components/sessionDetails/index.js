@@ -6,6 +6,8 @@ import { COLORS, SIZES } from '../global/constant';
 import copy from '../../copy.json';
 import { useSelector, useDispatch } from 'react-redux';
 import { setExercices } from '../../redux/features/training/exercicesSlice';
+import { getExercices } from '../../services';
+
 export default function SessionDetails({ route }) {
   const idSeance = route.params.idSeance;
   const dispatch = useDispatch();
@@ -13,10 +15,9 @@ export default function SessionDetails({ route }) {
 
   useEffect(() => {
     if (exercices === undefined) {
-      console.log('on get le state');
-      // get exercices and set
-      // dispatch(setExercices(fakeExo));
+      getExercices(idSeance).then(({ data }) => dispatch(setExercices(data)));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, exercices]);
 
   return (
@@ -27,6 +28,7 @@ export default function SessionDetails({ route }) {
         title={copy.identificate}
       />
       <Text>{`sessionDetails : ${idSeance}`}</Text>
+      <Text>{`nb exercices : ${exercices?.length}`}</Text>
     </Container>
   );
 }

@@ -74,6 +74,25 @@ const removeSeance = (db, idSeance, userId) => {
   });
 };
 
+const getExercicesOfSeance = (db, idSeance, userId) => {
+  return new Promise((resolve, reject) => {
+    db.collection('exercice')
+      .find({ idSeance, userId })
+      .toArray((err, docs) => {
+        if (err) {
+          return reject(err); // Reject the Promise with an error
+        }
+
+        var resultat = { idSeance };
+        resultat.exercices = docs.map(
+          ({ userId: userIdProp, idSeance: idSeanceExo, ...exercice }) =>
+            exercice,
+        );
+        return resolve(resultat); // Resolve (or fulfill) the promise with data
+      });
+  });
+};
+
 const insertUser = (db, user) => {
   return new Promise((resolve, reject) => {
     hashPassword(user.password).then(
@@ -131,6 +150,7 @@ module.exports = {
   getSeances,
   insertSeance,
   removeSeance,
+  getExercicesOfSeance,
   insertUser,
   url,
 };

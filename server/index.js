@@ -99,6 +99,26 @@ app.delete('/seance/:id', (req, res) => {
   }
 });
 
+/* EXERCICE */
+app.get('/seance/:id/exercices', (req, res) => {
+  if (db != null) {
+    verifyToken(req.cookies.token).then(
+      user => {
+        const idSeance = req.params.id;
+        dbFunctions.getExercicesOfSeance(db, idSeance, user.id).then(
+          data => res.status(200).json({ data }),
+          err => res.status(404).json({ erreur: err }),
+        );
+      },
+      () => res.status(404).json({ success: false }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
 /* USER */
 app.post('/user', (req, res) => {
   if (db != null) {
