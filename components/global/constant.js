@@ -25,6 +25,7 @@ export const VIEWS = {
   inscription: 'Inscription',
   mainPage: 'MainPage',
   session: 'Session',
+  sessionDetails: 'SessionDetails',
 };
 
 export const SIZES = {

@@ -36,7 +36,7 @@ export default function Session() {
     getSeances().then(({ data }) => dispatch(setSeances({ seances: data })));
   }, [dispatch]);
 
-  const onPress = id => alert(`clic on the item ${id}`);
+  const onPress = idSeance => navigate(VIEWS.sessionDetails, { idSeance });
 
   const onCan = () =>
     removeSeance(selectedId).then(({ data }) => {
