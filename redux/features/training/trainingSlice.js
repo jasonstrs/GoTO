@@ -21,10 +21,17 @@ export const trainingSlice = createSlice({
     addSeance: (state, action) => {
       state.seances.push(action.payload.seance);
     },
+    editSeance: (state, action) => {
+      state.seances = state.seances.map(seance =>
+        seance.id === action.payload.id
+          ? { ...seance, ...action.payload.body }
+          : seance,
+      );
+    },
   },
 });
 
-export const { setMuscles, setSeances, removeSeance, addSeance } =
+export const { setMuscles, setSeances, removeSeance, addSeance, editSeance } =
   trainingSlice.actions;
 
 export default trainingSlice.reducer;

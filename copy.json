@@ -42,8 +42,10 @@
   "ressenti.aucun": "Pas de ressenti",
   "add": "Ajouter",
   "edit": "Modifier",
+  "modification": "Modification",
   "trainingName": "Nom de la séance",
   "create": "Création",
   "session.create.description": "Lorsque tu auras créé ta séance, tu pourras la compléter en y ajoutant des exercices.",
+  "session.edit.description": "Sur cette page, tu peux modifier le nom de ta séance. N'hésite pas à utiliser un nom simple pour t'y retrouver facilement.",
   "back": "Retour"
 }

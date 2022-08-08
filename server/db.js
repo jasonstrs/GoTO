@@ -42,10 +42,10 @@ const getSeances = (db, userId) => {
   });
 };
 
-const insertSeance = (db, name, userId) => {
+const insertSeance = (db, nom, userId) => {
   return new Promise((resolve, reject) => {
     const seance = {
-      nom: name,
+      nom,
       muscles: [],
       ressenti: 'aucun',
       userId,
@@ -66,6 +66,19 @@ const removeSeance = (db, idSeance, userId) => {
     try {
       db.collection('seance')
         .deleteOne({ _id: ObjectId(idSeance), userId })
+        .then(data => resolve(data));
+    } catch (e) {
+      console.log(`ERROR :: ${e}`);
+      reject(e);
+    }
+  });
+};
+
+const editSeance = (db, idSeance, userId, body) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.collection('seance')
+        .updateOne({ _id: ObjectId(idSeance), userId }, { $set: body })
         .then(data => resolve(data));
     } catch (e) {
       console.log(`ERROR :: ${e}`);
@@ -164,6 +177,7 @@ module.exports = {
   getSeances,
   insertSeance,
   removeSeance,
+  editSeance,
   getExercicesOfSeance,
   removeExercice,
   insertUser,

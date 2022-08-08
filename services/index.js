@@ -43,6 +43,21 @@ const deleteRequest = async (url, body = {}) => {
   return data;
 };
 
+const patchRequest = async (url, body = {}) => {
+  const data = await fetch(url, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  }).then(
+    res => res.json(),
+    err => {
+      alertWarning(err.message);
+      return { success: false };
+    },
+  );
+  return data;
+};
+
 export const getAccueil = () => getRequest(URLS.accueil);
 
 export const getMuscles = () => getRequest(URLS.muscles);
@@ -60,6 +75,9 @@ export const postSeance = body =>
   postRequest(URLS.seance(), body).then(({ data }) => ({
     data: parseSeance(data),
   }));
+
+export const editSeance = (body, idSeance) =>
+  patchRequest(URLS.seance(idSeance), body);
 
 export const getExercices = async idSeance => {
   const { data } = await getRequest(URLS.exercicesOfSeance(idSeance));

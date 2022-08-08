@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, View, Text } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import copy from '../../copy.json';
@@ -7,18 +6,25 @@ import CustomTextInput from '../input/CustomTextInput';
 import CustomButton from '../buttons/CustomButton';
 import { COLORS, SIZES, VIEWS } from '../global/constant';
 import Title from '../header/Title';
-import { postSeance } from '../../services';
+import { editSeance, postSeance } from '../../services';
 import { useDispatch } from 'react-redux';
-import { addSeance } from '../../redux/features/training/trainingSlice';
+import {
+  addSeance,
+  editSeance as editSeanceRedux,
+} from '../../redux/features/training/trainingSlice';
 import Container from '../global/Container';
 
-export default function AddSeance({ isEdit, name, navigation }) {
+export default function AddSeance({ navigation, route }) {
+  const session = route.params.session;
+  const isEdit = Boolean(session);
+  const nom = session?.nom || '';
+
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: { name },
+    defaultValues: { nom },
   });
   const dispatch = useDispatch();
 
@@ -28,16 +34,24 @@ export default function AddSeance({ isEdit, name, navigation }) {
       navigation.navigate(VIEWS.session);
     });
 
+  const onEditSession = body =>
+    editSeance(body, session.id).then(({ data }) => {
+      if (data.acknowledged === true && data.modifiedCount === 1) {
+        dispatch(editSeanceRedux({ id: session.id, body }));
+        navigation.goBack();
+      }
+    });
+
   return (
     <Container>
       <View>
         <Title
           color={COLORS.blackBlue}
           size={SIZES.extraBig}
-          title={`${copy.create} 🐻`}
+          title={`${isEdit ? copy.modification : copy.create} 🐻`}
         />
         <Text style={styles.description}>
-          {copy['session.create.description']}
+          {copy[`session.${isEdit ? 'edit' : 'create'}.description`]}
         </Text>
         <Controller
           control={control}
@@ -51,21 +65,21 @@ export default function AddSeance({ isEdit, name, navigation }) {
               value={value}
             />
           )}
-          name="name"
+          name="nom"
         />
         <View style={styles.buttonContainer}>
           <CustomButton
             backgroundColor={'white'}
             borderColor={COLORS.red}
             color={COLORS.red}
-            onPress={() => navigation.navigate(VIEWS.session)}
+            onPress={() => navigation.goBack()}
             title={copy.back}
           />
           <CustomButton
             backgroundColor={'white'}
             borderColor={COLORS.darkBlue}
             color={COLORS.blackBlue}
-            onPress={handleSubmit(onAddSession)}
+            onPress={handleSubmit(isEdit ? onEditSession : onAddSession)}
             styleProp={styles.addButton}
             title={isEdit ? copy.edit : copy.add}
           />
@@ -74,16 +88,6 @@ export default function AddSeance({ isEdit, name, navigation }) {
     </Container>
   );
 }
-
-AddSeance.propTypes = {
-  isEdit: PropTypes.bool,
-  name: PropTypes.string,
-};
-
-AddSeance.defaultProps = {
-  isEdit: false,
-  name: '',
-};
 
 const styles = StyleSheet.create({
   description: {
