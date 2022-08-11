@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const exerciceSlice = createSlice({
+export const exercicesSlice = createSlice({
   name: 'exercices',
   initialState: {},
   reducers: {
@@ -15,6 +15,6 @@ export const exerciceSlice = createSlice({
   },
 });
 
-export const { setExercices, addExercice } = exerciceSlice.actions;
+export const { setExercices, addExercice } = exercicesSlice.actions;
 
-export default exerciceSlice.reducer;
+export default exercicesSlice.reducer;
