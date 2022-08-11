@@ -4,4 +4,5 @@ export const IMAGES = {
   home_carousel_2: require('./main_2.png'),
   home_carousel_3: require('./main_3.png'),
   logo: require('./logo.png'),
+  timer: require('./horloge.png'),
 };
