@@ -42,10 +42,10 @@ const getSeances = (db, userId) => {
   });
 };
 
-const insertSeance = (db, name, userId) => {
+const insertSeance = (db, nom, userId) => {
   return new Promise((resolve, reject) => {
     const seance = {
-      nom: name,
+      nom,
       muscles: [],
       ressenti: 'aucun',
       userId,
@@ -66,6 +66,52 @@ const removeSeance = (db, idSeance, userId) => {
     try {
       db.collection('seance')
         .deleteOne({ _id: ObjectId(idSeance), userId })
+        .then(data => resolve(data));
+    } catch (e) {
+      console.log(`ERROR :: ${e}`);
+      reject(e);
+    }
+  });
+};
+
+const editSeance = (db, idSeance, userId, body) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.collection('seance')
+        .updateOne({ _id: ObjectId(idSeance), userId }, { $set: body })
+        .then(data => resolve(data));
+    } catch (e) {
+      console.log(`ERROR :: ${e}`);
+      reject(e);
+    }
+  });
+};
+
+const getExercicesOfSeance = (db, idSeance, userId) => {
+  return new Promise((resolve, reject) => {
+    db.collection('exercice')
+      .find({ idSeance, userId })
+      .toArray((err, docs) => {
+        if (err) {
+          return reject(err); // Reject the Promise with an error
+        }
+
+        var resultat = { idSeance };
+        resultat.exercices = docs.map(
+          ({ userId: userIdProp, idSeance: idSeanceExo, ...exercice }) =>
+            exercice,
+        );
+        return resolve(resultat); // Resolve (or fulfill) the promise with data
+      });
+  });
+};
+
+// TODO: à tester
+const removeExercice = (db, idExercice, userId) => {
+  return new Promise((resolve, reject) => {
+    try {
+      db.collection('exercice')
+        .deleteOne({ _id: ObjectId(idExercice), userId })
         .then(data => resolve(data));
     } catch (e) {
       console.log(`ERROR :: ${e}`);
@@ -131,6 +177,9 @@ module.exports = {
   getSeances,
   insertSeance,
   removeSeance,
+  editSeance,
+  getExercicesOfSeance,
+  removeExercice,
   insertUser,
   url,
 };

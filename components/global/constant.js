@@ -15,6 +15,7 @@ export const COLORS = {
   darkBlue: '#2d78f8ff',
   green: '#27b052',
   lightBlue: '#dee9fc',
+  lightGreen: '#36C1A4',
   red: '#e50101',
 };
 
@@ -25,6 +26,7 @@ export const VIEWS = {
   inscription: 'Inscription',
   mainPage: 'MainPage',
   session: 'Session',
+  sessionDetails: 'SessionDetails',
 };
 
 export const SIZES = {

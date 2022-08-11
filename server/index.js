@@ -66,7 +66,7 @@ app.post('/seance', (req, res) => {
   if (db != null) {
     verifyToken(req.cookies.token).then(
       user => {
-        dbFunctions.insertSeance(db, req.body.name, user.id).then(
+        dbFunctions.insertSeance(db, req.body.nom, user.id).then(
           data => res.status(201).json({ data }),
           err => res.status(404).json({ erreur: err }),
         );
@@ -86,6 +86,65 @@ app.delete('/seance/:id', (req, res) => {
       user => {
         const idSeance = req.params.id;
         dbFunctions.removeSeance(db, idSeance, user.id).then(
+          data => res.status(200).json({ data }),
+          err => res.status(404).json({ erreur: err }),
+        );
+      },
+      () => res.status(404).json({ success: false }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
+app.patch('/seance/:id', (req, res) => {
+  if (db != null) {
+    verifyToken(req.cookies.token).then(
+      user => {
+        const idSeance = req.params.id;
+        dbFunctions.editSeance(db, idSeance, user.id, req.body).then(
+          data => res.status(200).json({ data }),
+          err => res.status(404).json({ erreur: err }),
+        );
+      },
+      () => res.status(404).json({ success: false }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
+/* EXERCICE */
+app.get('/seance/:id/exercices', (req, res) => {
+  if (db != null) {
+    verifyToken(req.cookies.token).then(
+      user => {
+        const idSeance = req.params.id;
+        dbFunctions.getExercicesOfSeance(db, idSeance, user.id).then(
+          data => res.status(200).json({ data }),
+          err => res.status(404).json({ erreur: err }),
+        );
+      },
+      () => res.status(404).json({ success: false }),
+    );
+  } else {
+    res
+      .status(404)
+      .json({ erreur: 'Impossible de se connecter à la base de données' });
+  }
+});
+
+// TODO à tester
+app.delete('/seance/:id/exercice/:idExo', (req, res) => {
+  if (db != null) {
+    verifyToken(req.cookies.token).then(
+      user => {
+        const idExercice = req.params.idExo;
+        dbFunctions.removeExercice(db, idExercice, user.id).then(
           data => res.status(200).json({ data }),
           err => res.status(404).json({ erreur: err }),
         );

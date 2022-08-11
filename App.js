@@ -25,6 +25,7 @@ import MainPage from './components/mainPage/MainPage';
 import Session from './components/session';
 import { Root } from 'react-native-alert-notification';
 import AddSeance from './components/session/AddSeance';
+import SessionDetails from './components/sessionDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,9 +35,7 @@ const App = () => {
 
   useEffect(() => {
     checkToken().then(({ success }) => {
-      if (success) {
-        dispatch(setToken({ token: success }));
-      }
+      dispatch(setToken({ token: success }));
     });
   }, [dispatch]);
 
@@ -59,6 +58,10 @@ const App = () => {
                   <Stack.Screen name={VIEWS.mainPage} component={MainPage} />
                   <Stack.Screen name={VIEWS.session} component={Session} />
                   <Stack.Screen name={VIEWS.addSeance} component={AddSeance} />
+                  <Stack.Screen
+                    name={VIEWS.sessionDetails}
+                    component={SessionDetails}
+                  />
                 </>
               ) : (
                 <>
